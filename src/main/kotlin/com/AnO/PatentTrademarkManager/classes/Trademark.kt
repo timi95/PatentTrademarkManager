@@ -1,5 +1,9 @@
 package com.AnO.PatentTrademarkManager.classes
 
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
 
-data class Trademark(val id:Int):Instruction
+@Entity
+data class Trademark(@Id @GeneratedValue val id:Int):Instruction
