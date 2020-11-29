@@ -13,14 +13,16 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
+	mavenLocal()
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
-	implementation("io.springfox:springfox-swagger-ui:3.0.0")
+
 	implementation("io.springfox:springfox-swagger2:3.0.0")
-	implementation("io.springfox:springfox-boot-starter:3.0.0")
-	implementation("io.springfox:springfox-bean-validators:3.0.0")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
 	implementation("org.springframework.boot:spring-boot-starter-web")
