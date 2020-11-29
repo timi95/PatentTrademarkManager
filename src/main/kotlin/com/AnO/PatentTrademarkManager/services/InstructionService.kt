@@ -21,9 +21,8 @@ class InstructionService {
     }
 
     fun createPatent(patent:Patent): Patent? {
-        try { this.patentRepository.save(patent) }
+        try { return this.patentRepository.save(patent) }
         catch (e: Exception){throw (e)}
-        return null
     }
 
     fun updatePatent(id:Long, patent:Patent): Patent? {
