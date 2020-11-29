@@ -30,11 +30,11 @@ class InstructionService {
         val check = this.patentRepository.findById(id)
         if (!check.isPresent)
             return throw(Exception("Patent of id:${id} does not exist"))
-            try {
-                val confirm  = patent.copy(id=id)
-                this.patentRepository.save(confirm)
-                return confirm
-            } catch (e: Exception){throw (e)}
+        try {
+            val confirm  = patent.copy(id=id)
+            this.patentRepository.save(confirm)
+            return confirm
+        } catch (e: Exception){throw (e)}
     }
 
     fun deletePatent(id: Long):Unit?{
