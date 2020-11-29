@@ -17,7 +17,6 @@ class SwaggerConfig {
     @Bean
     fun api(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
-                .host("http://localhost:8080")
                 .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.AnO.PatentTrademarkManager.controllers"))
