@@ -1,6 +1,7 @@
 package com.AnO.PatentTrademarkManager.controllers
 
 
+import com.AnO.PatentTrademarkManager.classes.Actions.SearchAction
 import com.AnO.PatentTrademarkManager.classes.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
@@ -49,4 +50,7 @@ class InstructionController {
   fun deletePatent(@PathVariable id: Long) =
           this.instructionService.deletePatent(id)
 
+  @PutMapping("/patent/{id}/search-action")
+  fun applySearchAction(@PathVariable id: Long, @RequestBody searchAction: SearchAction) =
+          this.instructionService.applySearchAction(id, searchAction)
 }
