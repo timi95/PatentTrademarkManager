@@ -1,2 +1,6 @@
 package com.AnO.PatentTrademarkManager.intefaces
-interface Action
+
+import javax.persistence.*
+
+@Entity
+abstract class Action(@Id @GeneratedValue open val id:Long?=null)
