@@ -4,7 +4,11 @@ import com.AnO.PatentTrademarkManager.classes.Patent
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+
 
 @Service
 class InstructionService {
@@ -13,24 +17,36 @@ class InstructionService {
     @Autowired
     lateinit var trademarkRepository:TrademarkRepository
 
-    fun getPatents():List<Patent>?{
-        return this.patentRepository.findAll()
-    }
-    fun getPatent(id:Long): Patent {
-        return this.patentRepository.findById(id).get()
-    }
 
-    fun createPatent(patent:Patent): Patent? {
+    private fun pageRequest(
+            page: Int?,
+            size: Int?,
+            direction: Sort.Direction,
+            sort_property:String): PageRequest =
+            PageRequest.of(page!!, size!!, Sort.by(direction, sort_property))
+
+    fun getPatents(page: Int? = 1,
+                   size: Int? = 10,
+                   direction: Sort.Direction,
+                   sort_property:String): Page<Patent> =
+            this.patentRepository
+                    .findAll(pageRequest(page, size, direction, sort_property))
+
+    fun getPatent(id: Long): Patent =
+            this.patentRepository.findById(id).get()
+
+
+    fun createPatent(patent: Patent): Patent? {
         try { return this.patentRepository.save(patent) }
         catch (e: Exception){throw (e)}
     }
 
-    fun updatePatent(id:Long, patent:Patent): Patent? {
+    fun updatePatent(id: Long, patent: Patent): Patent? {
         val check = this.patentRepository.findById(id)
         if (!check.isPresent)
             return throw(Exception("Patent of id:${id} does not exist"))
         try {
-            val confirm  = patent.copy(id=id)
+            val confirm  = patent.copy(id = id)
             this.patentRepository.save(confirm)
             return confirm
         } catch (e: Exception){throw (e)}
