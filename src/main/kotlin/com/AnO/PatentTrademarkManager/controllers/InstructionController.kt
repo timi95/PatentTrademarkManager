@@ -3,14 +3,18 @@ package com.AnO.PatentTrademarkManager.controllers
 
 import com.AnO.PatentTrademarkManager.classes.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
+import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 //import io.swagger.annotations.Api
 
 
+@Api(value = "Instruction",
+description = "Rest API for Instructions",
+tags = ["Instruction", "Patent","Trademark"])
 @RestController
 @RequestMapping("/Instruction")
-//@Api(value = "Instruction", description = "Rest API for Instructions", tags = arrayOf("User API"))
 class InstructionController {
   @Autowired
   lateinit var instructionService:InstructionService
@@ -22,11 +26,15 @@ class InstructionController {
   }
 
   @GetMapping("/patent")
-  fun getAllPatents() =
-          this.instructionService.getPatents()
+  fun getAllPatents(@RequestParam page:Int,
+                    @RequestParam size:Int,
+                    @RequestParam direction:Sort.Direction?,
+                    @RequestParam sort_property:String?) =
+          this.instructionService
+                  .getPatents(page, size, direction=Sort.DEFAULT_DIRECTION, sort_property="id")
 
   @GetMapping("/patent/{id}")
-  fun getPatent(@RequestParam id: Long) =
+  fun getPatent(@PathVariable id: Long) =
           this.instructionService.getPatent(id)
 
   @PostMapping("/patent")
@@ -34,11 +42,11 @@ class InstructionController {
           this.instructionService.createPatent(patent)
 
   @PutMapping("/patent/{id}")
-  fun updatePatent(@RequestParam id:Long, @RequestBody patent: Patent) =
+  fun updatePatent(@PathVariable id:Long, @RequestBody patent: Patent) =
           this.instructionService.updatePatent(id,patent)
 
   @DeleteMapping("/patent/{id}")
-  fun deletePatent(@RequestParam id: Long) =
+  fun deletePatent(@PathVariable id: Long) =
           this.instructionService.deletePatent(id)
 
 }
