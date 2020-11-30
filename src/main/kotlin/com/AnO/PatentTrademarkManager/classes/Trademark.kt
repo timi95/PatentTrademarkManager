@@ -6,4 +6,4 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-data class Trademark(@Id @GeneratedValue val id:Int):Instruction
+data class Trademark(@Id @GeneratedValue override val id:Long):Instruction()

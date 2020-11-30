@@ -4,14 +4,11 @@ import com.AnO.PatentTrademarkManager.classes.Actions.SearchAction
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 
 @Entity
 data class Patent(
-        @Id @GeneratedValue val id: Long?=null,
+        @Id @GeneratedValue override val id: Long?=null,
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
@@ -42,4 +39,6 @@ data class Patent(
         val month_outgoing_abuja_schedule: String?=null,
         val filing_receipt_status: String?=null,
         val applicable_service_charge: String?=null,
-        val quickteller_fee: String?=null, ):Instruction
+        val quickteller_fee: String?=null,
+        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+        val action_list: MutableList<Action>?=null):Instruction()
