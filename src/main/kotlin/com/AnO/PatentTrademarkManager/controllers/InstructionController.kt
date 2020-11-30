@@ -26,10 +26,10 @@ class InstructionController {
   }
 
   @GetMapping("/patent")
-  fun getAllPatents(@RequestParam page:Int,
-                    @RequestParam size:Int,
+  fun getAllPatents(@RequestParam(defaultValue = "1") page:Int,
+                    @RequestParam(defaultValue = "10") size:Int,
                     @RequestParam direction:Sort.Direction?,
-                    @RequestParam sort_property:String?) =
+                    @RequestParam(defaultValue = "id") sort_property:String?) =
           this.instructionService
                   .getPatents(page, size, direction=Sort.DEFAULT_DIRECTION, sort_property="id")
 
