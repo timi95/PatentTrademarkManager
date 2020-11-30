@@ -1,11 +1,13 @@
 package com.AnO.PatentTrademarkManager.classes
 
+import com.AnO.PatentTrademarkManager.classes.Actions.SearchAction
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.OneToMany
 
 @Entity
 data class Patent(
@@ -40,5 +42,4 @@ data class Patent(
         val month_outgoing_abuja_schedule: String?=null,
         val filing_receipt_status: String?=null,
         val applicable_service_charge: String?=null,
-        val quickteller_fee: String?=null,
-        val action_list: Sequence<Action>?=null):Instruction
+        val quickteller_fee: String?=null, ):Instruction
