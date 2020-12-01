@@ -3,10 +3,12 @@ package com.AnO.PatentTrademarkManager.classes
 import com.AnO.PatentTrademarkManager.classes.Actions.SearchAction
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
+import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
+@JsonTypeName("patent")
 data class Patent(
         @Id @GeneratedValue override val id: Long?=null,
 
