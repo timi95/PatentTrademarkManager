@@ -7,4 +7,4 @@ import javax.persistence.*
 
 @Entity
 @JsonTypeName("search_action")
-data class SearchAction(override val instruction_id:Long?=null): Action()
+data class SearchAction(override val instruction_id:Long?=null,private val type_id:String="search_action"): Action()

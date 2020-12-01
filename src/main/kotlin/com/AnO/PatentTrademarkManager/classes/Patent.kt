@@ -11,6 +11,7 @@ import javax.persistence.*
 @JsonTypeName("patent")
 data class Patent(
         @Id @GeneratedValue override val id: Long?=null,
+        private val type_id:String="patent",
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
