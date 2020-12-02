@@ -1,8 +1,7 @@
 package com.AnO.PatentTrademarkManager.services
 
-import com.AnO.PatentTrademarkManager.classes.Actions.SearchAction
+import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
 import com.AnO.PatentTrademarkManager.classes.Patent
-import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.SearchActionRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
@@ -65,7 +64,7 @@ class InstructionService {
 
     fun applySearchAction(
             instruction_id:Long,
-            search_action:SearchAction): Patent {
+            search_action: SearchAction): Patent {
         val instruction: Patent = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(search_action.copy(instruction_id = instruction.id))
         return this.patentRepository.save(instruction)

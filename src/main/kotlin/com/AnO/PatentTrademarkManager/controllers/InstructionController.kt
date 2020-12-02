@@ -1,7 +1,7 @@
 package com.AnO.PatentTrademarkManager.controllers
 
 
-import com.AnO.PatentTrademarkManager.classes.Actions.SearchAction
+import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
 import com.AnO.PatentTrademarkManager.classes.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
