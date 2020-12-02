@@ -1,4 +1,4 @@
-package com.AnO.PatentTrademarkManager.classes.Actions
+package com.AnO.PatentTrademarkManager.classes.Actions.PatentActions
 
 import com.AnO.PatentTrademarkManager.classes.Patent
 import com.AnO.PatentTrademarkManager.intefaces.Action
@@ -7,4 +7,4 @@ import javax.persistence.*
 
 @Entity
 @JsonTypeName("search_action")
-data class SearchAction(override val instruction_id:Long?=null,private val type_id:String="search_action"): Action()
+data class SearchAction(val instruction_id:Long?=null, private val type_id:String="search_action"): Action()
