@@ -2,18 +2,16 @@ package com.AnO.PatentTrademarkManager.controllers
 
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
-import com.AnO.PatentTrademarkManager.classes.Patent
+import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
-//import io.swagger.annotations.Api
-
 
 @Api(value = "Instruction",
 description = "Rest API for Instructions",
-tags = ["Instruction", "Patent","Trademark"])
+tags = ["Instruction"])
 @RestController
 @RequestMapping("/Instruction")
 class InstructionController {
