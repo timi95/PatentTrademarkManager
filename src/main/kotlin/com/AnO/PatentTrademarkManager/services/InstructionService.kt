@@ -1,7 +1,7 @@
 package com.AnO.PatentTrademarkManager.services
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
-import com.AnO.PatentTrademarkManager.classes.Patent
+import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository

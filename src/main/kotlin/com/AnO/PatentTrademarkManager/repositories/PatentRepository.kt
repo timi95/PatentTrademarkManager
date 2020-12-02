@@ -1,7 +1,6 @@
 package com.AnO.PatentTrademarkManager.repositories
 
-import com.AnO.PatentTrademarkManager.classes.Patent
-import com.AnO.PatentTrademarkManager.classes.Trademark
+import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface PatentRepository : JpaRepository<Patent, Long> //{

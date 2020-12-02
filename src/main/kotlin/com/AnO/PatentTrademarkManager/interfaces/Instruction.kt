@@ -1,6 +1,6 @@
 package com.AnO.PatentTrademarkManager.intefaces
 
-import com.AnO.PatentTrademarkManager.classes.Patent
+import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import javax.persistence.*
