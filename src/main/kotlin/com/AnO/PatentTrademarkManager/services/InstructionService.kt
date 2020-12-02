@@ -3,7 +3,7 @@ package com.AnO.PatentTrademarkManager.services
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
 import com.AnO.PatentTrademarkManager.classes.Patent
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
-import com.AnO.PatentTrademarkManager.repositories.SearchActionRepository
+import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
