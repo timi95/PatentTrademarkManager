@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 import javax.persistence.Entity
 
 @Entity
-@JsonTypeName("search_action")
+@JsonTypeName("amendment_action")
 data class AmendmentAction(
         val type_id:String?="amendment_action",
         val date_amendment_instruction_received: LocalDateTime?=null,
@@ -15,3 +15,14 @@ data class AmendmentAction(
         val date_amending_clerk_instructed:LocalDateTime?=null,
         val status_of_amendment:String?=null,
         val date_amendment_received: LocalDateTime?=null): Action()
+
+/*
+AmendmentAction {
+date_amendment_instruction_received:
+nature_of_amendment:
+amending_clerk:
+date_amending_clerk_instructed:
+status_of_amendment:
+date_amendment_received
+}
+ */
