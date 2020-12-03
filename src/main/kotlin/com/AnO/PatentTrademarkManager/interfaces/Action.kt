@@ -22,27 +22,9 @@ abstract class Action(@Id @GeneratedValue open val id:Long?=null)
 
 Patents
 
-AmendmentAction {
-date_amendment_instruction_received:
-nature_of_amendment:
-amending_clerk:
-date_amending_clerk_instructed:
-status_of_amendment:
-date_amendment_received
-}
 
-AssignmentMergerAction {
-assignment_instruction_date:
-assignment_instruction_month:
-date_abuja_instructed_assignment:
-clerk_assignment:
-status_assignment_registrations:
-assignor:
-assignor_address:
-assignee:
-assignee_address:
-date_assignment_certificate_received:
-}
+
+
 
 ChangeOfAddressAction {
 change_of_address_instruction_date:
