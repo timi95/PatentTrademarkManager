@@ -4,13 +4,16 @@ import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDateTime
+import java.util.*
 import javax.persistence.*
 
 @Entity
 @JsonTypeName("patent")
 data class Patent(
-        @Id @GeneratedValue override val id: Long?=null,
-        private val type_id:String="patent",
+        @Id @GeneratedValue override val id: UUID?=null,
+        override val type_id:String?=null,
+        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+        override val action_list: MutableList<Action>?=null,
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
@@ -41,6 +44,4 @@ data class Patent(
         val month_outgoing_abuja_schedule: String?=null,
         val filing_receipt_status: String?=null,
         val applicable_service_charge: String?=null,
-        val quickteller_fee: String?=null,
-        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
-        val action_list: MutableList<Action>?=null):Instruction()
+        val quickteller_fee: String?=null, ):Instruction()
