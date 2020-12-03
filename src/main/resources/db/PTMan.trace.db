@@ -217,3 +217,9 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 18 more
+2020-12-03 14:46:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP SEQUENCE IF EXISTS SYSTEM-[*]UUID"; SQL statement:
+drop sequence if exists system-uuid [42000-200]
+2020-12-03 14:46:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE SEQUENCE SYSTEM-[*]UUID START WITH 1 INCREMENT BY 1"; SQL statement:
+create sequence system-uuid start with 1 increment by 1 [42000-200]
