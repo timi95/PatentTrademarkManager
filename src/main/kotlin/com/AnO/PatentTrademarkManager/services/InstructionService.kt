@@ -54,9 +54,7 @@ class InstructionService {
 
 
     fun createPatent(patent: Patent): Patent? {
-        val mut_action_list = patent.action_list?.map{ it.instruction_id = patent.id } as MutableList<Action>
-        val confirm = patent.copy(action_list = mut_action_list )
-        try { return this.patentRepository.save(confirm) }
+        try { return this.patentRepository.save(patent.copy(action_list = mutableListOf<Action>())) }
         catch (e: Exception){throw (e)}
     }
 
@@ -83,7 +81,7 @@ class InstructionService {
             instruction_id:UUID,
             search_action: SearchAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
-        instruction.action_list?.add(search_action.copy(instruction_id = instruction.id))
+        instruction.action_list?.add(search_action.copy(instruction_ref = instruction.id))
         return this.saveInstruction(instruction)
     }
 
