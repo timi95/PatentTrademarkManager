@@ -13,5 +13,5 @@ import javax.persistence.*
 abstract class Instruction(
         @Id @GeneratedValue open val id: UUID?=null,
         open val type_id:String?=null,
-        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
         open val action_list: MutableList<Action>?=null)

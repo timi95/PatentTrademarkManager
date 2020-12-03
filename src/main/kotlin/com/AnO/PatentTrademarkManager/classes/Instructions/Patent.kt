@@ -44,4 +44,4 @@ data class Patent(
         val month_outgoing_abuja_schedule: String?=null,
         val filing_receipt_status: String?=null,
         val applicable_service_charge: String?=null,
-        val quickteller_fee: String?=null, ):Instruction()
+        val quickteller_fee: String?=null, ): Instruction()
