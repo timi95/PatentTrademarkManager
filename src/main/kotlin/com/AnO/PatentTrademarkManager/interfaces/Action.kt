@@ -17,7 +17,7 @@ this works for this type info structure
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type_id")
 @JsonSubTypes(
         JsonSubTypes.Type(value = SearchAction::class, name ="search_action"),)
-abstract class Action(@Id @GeneratedValue open val id:UUID?=null, open var instruction_id: UUID?=null)
+abstract class Action(@Id @GeneratedValue open val id:UUID?=null, open var instruction_ref: UUID?=null)
 
 /* concrete action types
 
