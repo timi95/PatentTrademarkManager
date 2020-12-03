@@ -2,14 +2,19 @@ package com.AnO.PatentTrademarkManager.services
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
 import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
-import com.AnO.PatentTrademarkManager.repositories.PatentRepository
+import com.AnO.PatentTrademarkManager.classes.Instructions.Trademark
+import com.AnO.PatentTrademarkManager.intefaces.Action
+import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository
+import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import java.util.*
+
 @Service
 class InstructionService {
 
@@ -21,6 +26,16 @@ class InstructionService {
     @Autowired
     lateinit var trademarkRepository:TrademarkRepository
 
+
+    private fun saveInstruction(instruction: Instruction): Instruction{
+        lateinit var final: Instruction
+        if (instruction is Patent){
+            final = this.patentRepository.save(instruction)
+        } else if (instruction is Trademark){
+            final = this.trademarkRepository.save(instruction)
+        }
+        return  final
+    }
 
     private fun pageRequest(page: Int?,
                     size: Int?,
@@ -34,16 +49,18 @@ class InstructionService {
                    sort_property:String): Page<Patent> =
             this.patentRepository.findAll(pageRequest(page, size, direction, sort_property))
 
-    fun getPatent(id: Long): Patent =
+    fun getPatent(id: UUID): Patent =
             this.patentRepository.findById(id).get()
 
 
     fun createPatent(patent: Patent): Patent? {
-        try { return this.patentRepository.save(patent) }
+        val mut_action_list = patent.action_list?.map{ it.instruction_id = patent.id } as MutableList<Action>
+        val confirm = patent.copy(action_list = mut_action_list )
+        try { return this.patentRepository.save(confirm) }
         catch (e: Exception){throw (e)}
     }
 
-    fun updatePatent(id: Long, patent: Patent): Patent? {
+    fun updatePatent(id: UUID, patent: Patent): Patent? {
         val check = this.patentRepository.findById(id)
         if (!check.isPresent)
             return throw(Exception("Patent of id:${id} does not exist"))
@@ -54,7 +71,7 @@ class InstructionService {
         } catch (e: Exception){throw (e)}
     }
 
-    fun deletePatent(id: Long):Unit?{
+    fun deletePatent(id: UUID):Unit?{
         try {
             return this.patentRepository
                     .delete(this.patentRepository.findById(id).get()) }
@@ -63,11 +80,11 @@ class InstructionService {
 
 
     fun applySearchAction(
-            instruction_id:Long,
-            search_action: SearchAction): Patent {
-        val instruction: Patent = this.patentRepository.findById(instruction_id).get()
+            instruction_id:UUID,
+            search_action: SearchAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(search_action.copy(instruction_id = instruction.id))
-        return this.patentRepository.save(instruction)
+        return this.saveInstruction(instruction)
     }
 
 
