@@ -23,76 +23,10 @@ abstract class Action(@Id @GeneratedValue open val id:UUID?=null, open var instr
 
 Patents
 
-ProcurementOfCertificateAction {
-date_procurement_instructed:
-application_no:
-invention_description:
-clerk_procuring:
-month_clerk_instructed:
-procurement_status:
-date_cert_procured:
-patent_regtn_no:
-date_cert_procurement_due:
-month_cert_procurement_due:
-}
 
-RegistrationAction {
-date_registration_instruction_received:
-month_registration_instruction_received:
-clerk_registration:
-date_abuja_instructed_for_registration:
-convention_priority_ref_1:
-convention_priority_date_1:
-convention_priority_ref_2:
-convention_priority_date_2:
-convention_priority_ref_3:
-convention_priority_date_3:
-PCT_ref_no:
-PCT_filling_date:
-filling_deadline:
-application_no:
-patent_registration_filling_date:
-registration_filling_month:
-registration_status:
-acknowledgement_status:
-acceptance_date:
-cert_procurement_date:
-cert_procurment_month:
-patent_registration_no:
-correspondence_date:
-date_of_instruction:
-clients_contact_person:
-official_fee_registration:
-}
 
-RenewalAction {
-date_registration_instruction_received:
-month_registration_instruction_received:
-clerk_registration:
-date_abuja_instructed_for_registration:
-convention_priority_ref_1:
-convention_priority_date_1:
-convention_priority_ref_2:
-convention_priority_date_2:
-convention_priority_ref_3:
-convention_priority_date_3:
-PCT_ref_no:
-PCT_filling_date:
-filling_deadline:
-application_no:
-patent_registration_filling_date:
-registration_filling_month:
-registration_status:
-acknowledgement_status:
-acceptance_date:
-cert_procurement_date:
-cert_procurment_month:
-patent_registration_no:
-correspondence_date:
-date_of_instruction:
-clients_contact_person:
-official_fee_registration:
-}
+
+
 
 
 
