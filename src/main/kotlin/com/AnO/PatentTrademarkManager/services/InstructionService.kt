@@ -81,9 +81,13 @@ class InstructionService {
             instruction_id:UUID,
             search_action: SearchAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
-        instruction.action_list?.add(search_action.copy(instruction_ref = instruction.id))
+        instruction.action_list?.add(
+                search_action
+                        .copy(instruction_ref = instruction.id,
+                                type_id = "search_action"))
         return this.saveInstruction(instruction)
     }
+
 
 
 }
