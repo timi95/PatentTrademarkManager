@@ -23,37 +23,6 @@ abstract class Action(@Id @GeneratedValue open val id:UUID?=null, open var instr
 
 Patents
 
-
-
-
-
-ChangeOfAddressAction {
-change_of_address_instruction_date:
-change_of_address_instruction_month:
-new_address_of_patentee:
-clerk_of_change_of_address:
-status_change_of_address:
-date_received_change_of_address_certificate:
-}
-
-ChangeOfNameAction {
-change_of_name_instruction_date:
-change_of_name_instruction_month:
-new_name_of_patentee:
-clerk_for_change_of_name:
-status_of_change_of_name:
-date_received_change_of_name_certificate:
-}
-
-CTCAction {
-application_no:
-patent_registration_no:
-ctc_required:
-date_applied_for_ctc:
-ctc_procurement_status:
-clerk_responsible:
-}
-
 ProcurementOfCertificateAction {
 date_procurement_instructed:
 application_no:
@@ -125,12 +94,6 @@ clients_contact_person:
 official_fee_registration:
 }
 
-SearchAction {
-search_status:
-reported_to_client:
-date_reported_to_client:
-clerk_searching:
-}
 
 
 Trademark
