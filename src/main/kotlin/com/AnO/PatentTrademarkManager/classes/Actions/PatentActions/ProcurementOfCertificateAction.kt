@@ -19,7 +19,7 @@ data class ProcurementOfCertificateAction(
         val month_clerk_instructed: String?=null,
         val procurement_status: String?=null,
         val date_cert_procured: LocalDateTime?=null,
-        val patent_regtn_no: String?=null,
+        val patent_registration_no: String?=null,
         val date_cert_procurement_due: LocalDateTime?=null,
         val month_cert_procurement_due: String?=null): Action()
 /*
