@@ -3,11 +3,15 @@ package com.AnO.PatentTrademarkManager.classes.Actions.PatentActions
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDateTime
+import java.util.*
 import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("ctc")
-class CTCAction(
+data class CTCAction(
+        private val type_id:String?=null,
+        override var instruction_ref: UUID?=null,
+
         val application_no: String?=null,
         val ctc_required: String?=null,
         val date_applied_for_ctc: LocalDateTime?=null,
