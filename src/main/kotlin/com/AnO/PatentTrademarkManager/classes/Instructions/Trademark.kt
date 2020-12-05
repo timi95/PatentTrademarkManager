@@ -2,10 +2,12 @@ package com.AnO.PatentTrademarkManager.classes.Instructions
 
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
+import com.fasterxml.jackson.annotation.JsonTypeName
 import java.util.*
 import javax.persistence.*
 
 @Entity
+@JsonTypeName("trademark")
 data class Trademark(
         @Id @GeneratedValue override val id: UUID?=null,
         override val type_id:String?=null,
