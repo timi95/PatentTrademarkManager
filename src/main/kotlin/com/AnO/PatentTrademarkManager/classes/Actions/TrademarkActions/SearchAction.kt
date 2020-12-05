@@ -1,7 +1,19 @@
 package com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions
 
-class SearchAction {
-}
+import com.AnO.PatentTrademarkManager.intefaces.Action
+import java.time.LocalDateTime
+
+data class SearchAction(
+
+        val clerk_searching: String?=null,
+        val conflicting_mark: String?=null,
+        val date_of_search_report: LocalDateTime?=null,
+        val date_reported_to_client: LocalDateTime?=null,
+        val official_search_fee: String?=null,
+        val reported_to_client: String?=null,
+        val search_instruction_date: LocalDateTime?=null,
+        val search_status: String?=null,
+        val search_type: String?=null,): Action()
 
 /*
 T_search_action:any = {
