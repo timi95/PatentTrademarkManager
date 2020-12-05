@@ -1,7 +1,26 @@
 package com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions
 
-class RenewalAction {
-}
+import com.AnO.PatentTrademarkManager.intefaces.Action
+import com.fasterxml.jackson.annotation.JsonTypeName
+import java.time.LocalDateTime
+import javax.persistence.Entity
+
+@Entity
+@JsonTypeName("renewal")
+data class RenewalAction(
+
+        val date_renewal_cert_facilitation_sent: LocalDateTime?=null,
+        val date_abj_instructed_renewal: LocalDateTime?=null,
+        val date_renew_cert_received: LocalDateTime?=null,
+        val next_renewal_due_date: LocalDateTime?=null,
+        val next_renewal_due_month: String?=null,
+        val official_fee_renewal: String?=null,
+        val renewal_cert_facilitation_sent: String?=null,
+        val renewal_due_date: LocalDateTime?=null,
+        val renewal_due_month: String?=null,
+        val renewal_instruction_date: LocalDateTime?=null,
+        val renewal_instruction_month: String?=null,
+        val renewal_status: String?=null): Action()
 
 /*
 T_renewal_action:any = {
