@@ -22,8 +22,8 @@ data class P_AssignmentMergerAction(
         val assignee:String?=null,
         val assignee_address:String?=null,
         val date_assignment_certificate_received:LocalDateTime?=null,
-        val date_facillitation_assignment_cert_sent:LocalDateTime?=null,
-        val date_facillitation_assignment_cert_sent_sent:LocalDateTime?=null,
+        val date_facilitation_assignment_cert_sent:LocalDateTime?=null,
+        val date_facilitation_assignment_cert_sent_sent:LocalDateTime?=null,
         val official_fee_assignment:String?=null,
         val clerk_assigning:String?=null): Action()
 
