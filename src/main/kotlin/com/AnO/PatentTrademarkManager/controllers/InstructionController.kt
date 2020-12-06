@@ -1,8 +1,9 @@
 package com.AnO.PatentTrademarkManager.controllers
 
 
-import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.P_SearchAction
+import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
+import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
@@ -53,6 +54,34 @@ class InstructionController {
           this.instructionService.deletePatent(id)
 
   @PutMapping("/patent/{id}/search-action")
-  fun applySearchAction(@PathVariable id: UUID, @RequestBody pSearchAction: P_SearchAction) =
-          this.instructionService.applySearchAction(id, pSearchAction)
+  fun applySearchAction(@PathVariable id: UUID, @RequestBody pAction: P_SearchAction) =
+          this.instructionService.applyPSearchAction(id, pAction)
+
+  @PutMapping("/patent/{id}/assignment-merger-action")
+  fun applyPAssignmentMergerAction(@PathVariable id: UUID, @RequestBody pAction: P_AssignmentMergerAction) =
+          this.instructionService.applyPAssignmentMergerAction(id, pAction)
+
+  @PutMapping("/patent/{id}/change-of-address-action")
+  fun applyPChangeOfAddressAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfAddressAction) =
+          this.instructionService.applyPChangeOfAddressAction(id, pAction)
+
+  @PutMapping("/patent/{id}/change-of-name-action")
+  fun applyPChangeOfNameAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfNameAction) =
+          this.instructionService.applyPChangeOfNameAction(id, pAction)
+
+  @PutMapping("/patent/{id}/ctc-action")
+  fun applyPCTCAction(@PathVariable id: UUID, @RequestBody pAction: P_CTCAction) =
+          this.instructionService.applyPCTCAction(id, pAction)
+
+  @PutMapping("/patent/{id}/procurement-of-certificate-action")
+  fun applyPProcurementOfCertificateAction(@PathVariable id: UUID, @RequestBody pAction: P_ProcurementOfCertificateAction) =
+          this.instructionService.applyPProcurementOfCertificateAction(id, pAction)
+
+  @PutMapping("/patent/{id}/registration-action")
+  fun applyPRegistrationAction(@PathVariable id: UUID, @RequestBody pAction: P_RegistrationAction) =
+          this.instructionService.applyPRegistrationAction(id, pAction)
+
+  @PutMapping("/patent/{id}/renewal-action")
+  fun applyPRenewalAction(@PathVariable id: UUID, @RequestBody pAction: P_RenewalAction) =
+          this.instructionService.applyPRenewalAction(id, pAction)
 }
