@@ -17,7 +17,7 @@ data class Patent(
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
-        val clients_reference_number: String?=null,tim
+        val clients_reference_number: String?=null,
         val current_instruction: String?=null,
         val date_of_instruction: LocalDateTime?=null,
         val name_of_client: String?=null,
