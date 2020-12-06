@@ -43,6 +43,7 @@ class InstructionService {
                     sort_property:String): PageRequest =
             PageRequest.of(page!!, size!!, Sort.by(direction, sort_property))
 
+    //  PATENT METHODS
     fun getPatents(page: Int? = 1,
                    size: Int? = 10,
                    direction: Sort.Direction,
@@ -141,6 +142,41 @@ class InstructionService {
         return this.saveInstruction(instruction)
     }
 
+
+    //  TRADEMARK METHODS
+
+    fun getTrademarks(page: Int? = 1,
+                   size: Int? = 10,
+                   direction: Sort.Direction,
+                   sort_property:String): Page<Trademark> =
+            this.trademarkRepository.findAll(pageRequest(page, size, direction, sort_property))
+
+    fun getTrademark(id: UUID): Trademark =
+            this.trademarkRepository.findById(id).get()
+
+
+    fun createTrademark(trademark: Trademark): Trademark? {
+        try { return this.trademarkRepository.save(trademark.copy(action_list = mutableListOf<Action>())) }
+        catch (e: Exception){throw (e)}
+    }
+
+    fun updateTrademark(id: UUID, trademark: Trademark): Trademark? {
+        val check = this.trademarkRepository.findById(id)
+        if (!check.isPresent)
+            return throw(Exception("Patent of id:${id} does not exist"))
+        try {
+            val confirm  = trademark.copy(id = id)
+            this.trademarkRepository.save(confirm)
+            return confirm
+        } catch (e: Exception){throw (e)}
+    }
+
+    fun deleteTrademark(id: UUID):Unit?{
+        try {
+            return this.trademarkRepository
+                    .delete(this.trademarkRepository.findById(id).get()) }
+        catch (e: Exception){throw (e)}
+    }
 }
 
 
