@@ -1,6 +1,6 @@
 package com.AnO.PatentTrademarkManager.services
 
-import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.P_SearchAction
+import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.classes.Instructions.Trademark
 import com.AnO.PatentTrademarkManager.intefaces.Action
@@ -77,18 +77,69 @@ class InstructionService {
     }
 
 
-    fun applySearchAction(
+    fun applyPSearchAction(
             instruction_id:UUID,
-            p_search_action: P_SearchAction): Instruction {
+            action: P_SearchAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
-        instruction.action_list?.add(
-                p_search_action
-                        .copy(instruction_ref = instruction.id,
-                                type_id = "search_action"))
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
         return this.saveInstruction(instruction)
     }
 
+    fun applyPAssignmentMergerAction(
+            instruction_id:UUID,
+            action: P_AssignmentMergerAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
 
+    fun applyPChangeOfAddressAction(
+            instruction_id:UUID,
+            action: P_ChangeOfAddressAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
+
+    fun applyPChangeOfNameAction(
+            instruction_id:UUID,
+            action: P_ChangeOfNameAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
+
+    fun applyPCTCAction(
+            instruction_id:UUID,
+            action: P_CTCAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
+
+    fun applyPProcurementOfCertificateAction(
+            instruction_id:UUID,
+            action: P_ProcurementOfCertificateAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
+
+    fun applyPRegistrationAction(
+            instruction_id:UUID,
+            action: P_RegistrationAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
+
+    fun applyPRenewalAction(
+            instruction_id:UUID,
+            action: P_RenewalAction): Instruction {
+        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return this.saveInstruction(instruction)
+    }
 
 }
 
