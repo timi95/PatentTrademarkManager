@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("procurement_of_certificate")
-data class ProcurementOfCertificateAction(
+data class P_ProcurementOfCertificateAction(
         private val type_id:String?=null,
         override var instruction_ref: UUID?=null,
 

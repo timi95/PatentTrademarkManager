@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("renewal")
-data class RenewalAction(
+data class P_RenewalAction(
         private val type_id: String?=null,
         override var instruction_ref: UUID?=null,
 

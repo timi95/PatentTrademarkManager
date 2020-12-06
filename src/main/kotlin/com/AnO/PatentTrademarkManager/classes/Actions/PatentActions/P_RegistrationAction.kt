@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("registration")
-data class RegistrationAction(
+data class P_RegistrationAction(
         private val type_id: String?=null,
         override var instruction_ref: UUID?=null,
 

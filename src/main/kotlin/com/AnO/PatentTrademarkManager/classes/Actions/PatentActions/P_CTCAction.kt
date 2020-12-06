@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("ctc")
-data class CTCAction(
+data class P_CTCAction(
         private val type_id:String?=null,
         override var instruction_ref: UUID?=null,
 

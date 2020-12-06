@@ -1,12 +1,10 @@
 package com.AnO.PatentTrademarkManager.controllers
 
 
-import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.SearchAction
+import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.P_SearchAction
 import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
@@ -55,6 +53,6 @@ class InstructionController {
           this.instructionService.deletePatent(id)
 
   @PutMapping("/patent/{id}/search-action")
-  fun applySearchAction(@PathVariable id: UUID, @RequestBody searchAction: SearchAction) =
-          this.instructionService.applySearchAction(id, searchAction)
+  fun applySearchAction(@PathVariable id: UUID, @RequestBody pSearchAction: P_SearchAction) =
+          this.instructionService.applySearchAction(id, pSearchAction)
 }

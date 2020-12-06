@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("assignment_merger")
-data class AssignmentMergerAction(
+data class P_AssignmentMergerAction(
         private val type_id:String?=null,
         override var instruction_ref: UUID?=null,
 
