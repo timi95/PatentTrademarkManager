@@ -7,7 +7,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("registration")
-data class RegistrationAction(
+data class T_RegistrationAction(
 
         val acceptance_date: LocalDateTime?=null,
         val acceptance_facilitation_sent: String?=null,

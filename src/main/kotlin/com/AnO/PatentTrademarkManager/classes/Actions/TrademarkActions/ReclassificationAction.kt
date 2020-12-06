@@ -7,7 +7,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("reclassification")
-data class ReclassificationAction(
+data class T_ReclassificationAction(
 
         val date_reclassification_instruction: LocalDateTime?=null,
         val date_abj_instructed_reclassify: LocalDateTime?=null,

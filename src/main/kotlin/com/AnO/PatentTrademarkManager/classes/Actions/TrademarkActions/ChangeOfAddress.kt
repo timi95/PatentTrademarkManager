@@ -7,7 +7,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("change_of_address")
-data class ChangeOfAddress(
+data class T_ChangeOfAddress(
         val change_of_address_instruction_date: LocalDateTime?=null,
         val change_of_name_instruction_date: LocalDateTime?=null,
         val date_received_change_of_address_certificate:LocalDateTime?=null,

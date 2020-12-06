@@ -7,7 +7,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("procurement_of_certificate")
-data class ProcurementOfCertificateAction(
+data class T_ProcurementOfCertificateAction(
         val date_procurement_instructed: LocalDateTime?=null,
         val application_no: String?=null,
         val trademark_description:String?=null,

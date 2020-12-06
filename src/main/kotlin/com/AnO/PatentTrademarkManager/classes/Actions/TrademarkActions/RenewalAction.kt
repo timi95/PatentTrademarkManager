@@ -7,7 +7,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("renewal")
-data class RenewalAction(
+data class T_RenewalAction(
 
         val date_renewal_cert_facilitation_sent: LocalDateTime?=null,
         val date_abj_instructed_renewal: LocalDateTime?=null,

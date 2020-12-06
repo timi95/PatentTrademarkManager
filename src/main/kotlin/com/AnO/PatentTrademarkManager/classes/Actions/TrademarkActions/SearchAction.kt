@@ -3,7 +3,7 @@ package com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import java.time.LocalDateTime
 
-data class SearchAction(
+data class T_SearchAction(
 
         val clerk_searching: String?=null,
         val conflicting_mark: String?=null,

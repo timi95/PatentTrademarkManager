@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("amendment")
-data class AmendmentAction(
+data class T_AmendmentAction(
         private val type_id:String?=null,
         override var instruction_ref: UUID?=null,
 
