@@ -14,6 +14,7 @@ import java.util.*
 @Api(value = "Instruction",
 description = "Rest API for Instructions",
 tags = ["Instruction"])
+@CrossOrigin(origins = arrayOf("http://localhost:4200","*"), maxAge = 3600)
 @RestController
 @RequestMapping("/Instruction")
 class InstructionController {
@@ -25,6 +26,7 @@ class InstructionController {
     println("Start method called")
     return "Hello World"
   }
+
 
   @GetMapping("/patent")
   fun getAllPatents(@RequestParam(defaultValue = "0") page:Int,
