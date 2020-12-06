@@ -17,14 +17,14 @@ data class Patent(
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
-        val clients_reference_number: String?=null,
-        val curent_instruction: String?=null,
+        val clients_reference_number: String?=null,tim
+        val current_instruction: String?=null,
         val date_of_instruction: LocalDateTime?=null,
         val name_of_client: String?=null,
         val clients_address: String?=null,
         val clients_contact_person:String?=null,
         val name_of_patentee: String?=null,
-        val patentees_address: String?=null,
+        val patentee_address: String?=null,
         val date_instruction_received: LocalDateTime?=null,
         val lawyer_responsible: String?=null,
         val invention_description: String?=null,
