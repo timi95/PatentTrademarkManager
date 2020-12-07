@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.jvm.tasks.Jar
 
 plugins {
 	id("org.springframework.boot") version "2.4.0"
@@ -20,7 +19,7 @@ repositories {
 }
 
 dependencies {
-
+	implementation("commons-io:commons-io:2.6")
 	implementation("io.springfox:springfox-swagger2:3.0.0")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
@@ -46,22 +45,13 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
+tasks.register<Jar>("uberJar") {
+	archiveClassifier.set("uber")
 
+	from(sourceSets.main.get().output)
 
-
-val fatJar = task("fatJar", type = Jar::class) {
-	baseName = "${project.name}-fat"
-	manifest {
-		attributes["Implementation-Title"] = "Gradle Jar File Example"
-		attributes["Implementation-Version"] = version
-		attributes["Main-Class"] = "com.mkyong.DateUtils"
-	}
-	from(configurations.runtimeClasspath.get().map({ if (it.isDirectory) it else zipTree(it) }))
-	with(tasks.jar.get() as CopySpec)
-}
-
-tasks {
-	"build" {
-		dependsOn(fatJar)
-	}
+	dependsOn(configurations.runtimeClasspath)
+	from({
+		configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+	})
 }
