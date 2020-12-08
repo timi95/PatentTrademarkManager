@@ -1,2 +1,1 @@
 --server.port=$PORT
--Dserver.port=$PORT
