@@ -1,11 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
 	id("org.springframework.boot") version "2.4.0"
+	id("com.github.johnrengelman.shadow") version "2.0.4"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
 	kotlin("jvm") version "1.4.10"
 	kotlin("plugin.spring") version "1.4.10"
 	kotlin("plugin.jpa") version "1.4.10"
+
 }
 
 group = "com.AnO"
@@ -45,13 +48,18 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-tasks.register<Jar>("uberJar") {
-	archiveClassifier.set("uber")
+tasks {
+	named<ShadowJar>("shadowJar") {
+		archiveBaseName.set("shadow")
+		mergeServiceFiles()
+		manifest {
+			attributes(mapOf("Main-Class" to "com.github.csolem.gradle.shadow.kotlin.example.App"))
+		}
+	}
+}
 
-	from(sourceSets.main.get().output)
-
-	dependsOn(configurations.runtimeClasspath)
-	from({
-		configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-	})
+tasks {
+	build {
+		dependsOn(shadowJar)
+	}
 }
