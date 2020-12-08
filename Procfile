@@ -1,1 +1,1 @@
-web: java -Dserver.port=8080 $JAVA_OPTS -jar /PatentTrademarkManager/build/PatentTrademarkManager-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=8080 $JAVA_OPTS -jar /build/PatentTrademarkManager-0.0.1-SNAPSHOT.jar
