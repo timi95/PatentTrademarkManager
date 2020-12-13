@@ -72,8 +72,7 @@ class InstructionService {
 
     fun deletePatent(id: UUID):Unit?{
         try {
-            return this.patentRepository
-                    .delete(this.patentRepository.findById(id).get()) }
+            return this.patentRepository.deleteById(id) }
         catch (e: Exception){throw (e)}
     }
 
