@@ -23,10 +23,7 @@ this works for this type info structure
         JsonSubTypes.Type(value = P_CTCAction::class, name ="P_ctc"),
         JsonSubTypes.Type(value = P_RenewalAction::class, name ="P_renewal"),)
 abstract class Action(@Id @GeneratedValue open val id:UUID?=null,
-                      open var instruction_ref: UUID?=null,
-                      @ManyToOne(cascade = arrayOf(CascadeType.ALL))
-                      @JoinColumn(name = "patent_id")
-                      val patent: Patent?=null)
+                      open var instruction_ref: UUID?=null)
 
 /* concrete action types
 
