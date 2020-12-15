@@ -12,8 +12,7 @@ import javax.persistence.*
 data class Patent(
         @Id @GeneratedValue override val id: UUID?=null,
         override val type_id:String?=null,
-        @OneToMany(mappedBy = "patent", fetch = FetchType.LAZY,
-                cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
+        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
         override val action_list: MutableList<Action>?= mutableListOf<Action>(),
 
         val our_reference_number: String?=null,
