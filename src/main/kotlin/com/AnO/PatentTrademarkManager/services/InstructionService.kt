@@ -62,7 +62,7 @@ class InstructionService {
     fun updatePatent(id: UUID, patent: Patent): Patent? {
         val check = this.patentRepository.findById(id)
         if (!check.isPresent)
-            return throw(Exception("Patent of id:${id} does not exist"))
+            throw(Exception("Patent of id:${id} does not exist"))
         try {
             val confirm  = patent.copy(id = id)
             this.patentRepository.save(confirm)
