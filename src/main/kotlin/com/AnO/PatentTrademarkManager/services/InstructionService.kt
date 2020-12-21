@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.util.*
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @Service
 class InstructionService {
@@ -70,7 +71,7 @@ class InstructionService {
         } catch (e: Exception){throw (e)}
     }
 
-    fun deletePatent(id: UUID):Unit?{
+     fun deletePatent(id: UUID):Unit?{
         try {
             return this.patentRepository.deleteById(id) }
         catch (e: Exception){throw (e)}
@@ -162,7 +163,7 @@ class InstructionService {
     fun updateTrademark(id: UUID, trademark: Trademark): Trademark? {
         val check = this.trademarkRepository.findById(id)
         if (!check.isPresent)
-            return throw(Exception("Patent of id:${id} does not exist"))
+             throw(Exception("Patent of id:${id} does not exist"))
         try {
             val confirm  = trademark.copy(id = id)
             this.trademarkRepository.save(confirm)
