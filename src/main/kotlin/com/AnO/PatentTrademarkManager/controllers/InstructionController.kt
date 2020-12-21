@@ -14,7 +14,7 @@ import java.util.*
 @Api(value = "Instruction",
 description = "Rest API for Instructions",
 tags = ["Instruction"])
-@CrossOrigin(origins = arrayOf("http://localhost:4200","*"), maxAge = 3600)
+@CrossOrigin(origins = arrayOf("http://localhost:4200"))
 @RestController
 @RequestMapping("/Instruction")
 class InstructionController {
@@ -70,7 +70,7 @@ class InstructionController {
   @PutMapping("/patent/{id}/change-of-name-action")
   fun applyPChangeOfNameAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfNameAction) =
           this.instructionService.applyPChangeOfNameAction(id, pAction)
-
+  
   @PutMapping("/patent/{id}/ctc-action")
   fun applyPCTCAction(@PathVariable id: UUID, @RequestBody pAction: P_CTCAction) =
           this.instructionService.applyPCTCAction(id, pAction)
