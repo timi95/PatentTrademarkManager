@@ -17,11 +17,11 @@ this works for this type info structure
 @Entity
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type_id")
 @JsonSubTypes(
-        JsonSubTypes.Type(value = P_SearchAction::class, name ="P_search_action"),
-        JsonSubTypes.Type(value = P_AssignmentMergerAction::class, name ="P_assignment_merger"),
-        JsonSubTypes.Type(value = P_AmendmentAction::class, name ="P_amendment_action"),
-        JsonSubTypes.Type(value = P_CTCAction::class, name ="P_ctc"),
-        JsonSubTypes.Type(value = P_RenewalAction::class, name ="P_renewal"),)
+        JsonSubTypes.Type(value = P_SearchAction::class, name ="search"),
+        JsonSubTypes.Type(value = P_AssignmentMergerAction::class, name ="assignment_merger"),
+        JsonSubTypes.Type(value = P_AmendmentAction::class, name ="amendment_action"),
+        JsonSubTypes.Type(value = P_CTCAction::class, name ="ctc"),
+        JsonSubTypes.Type(value = P_RenewalAction::class, name ="renewal"),)
 abstract class Action(@Id @GeneratedValue open val id:UUID?=null,
                       open var instruction_ref: UUID?=null)
 
