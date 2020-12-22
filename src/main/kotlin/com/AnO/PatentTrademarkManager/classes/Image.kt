@@ -11,4 +11,5 @@ data class Image(
         @GeneratedValue @Id val id:UUID?=null,
         val pathString:String?=null,
         val imageName: String?=null,
-        val imageFile: MultipartFile?=null)
+        val imageSize: Long?=null,
+        val contentType: String?=null)
