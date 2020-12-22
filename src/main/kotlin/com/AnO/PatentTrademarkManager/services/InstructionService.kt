@@ -1,23 +1,36 @@
 package com.AnO.PatentTrademarkManager.services
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
+import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.classes.Instructions.Trademark
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository
+import com.AnO.PatentTrademarkManager.repositories.ImageRepository
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import org.springframework.util.StringUtils
+import org.springframework.web.multipart.MultipartFile
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.util.*
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @Service
 class InstructionService {
+    @Value("\${file.upload-dir}")
+    lateinit var UPLOAD_DIR: String
+    @Value("\${file.download-url}")
+    lateinit var downloadUrl: String
 
     @Autowired
     lateinit var searchActionRepository: SearchActionRepository
@@ -27,6 +40,8 @@ class InstructionService {
     @Autowired
     lateinit var trademarkRepository:TrademarkRepository
 
+    @Autowired
+    lateinit var imageRepository: ImageRepository
 
     private fun saveInstruction(instruction: Instruction): Instruction{
         lateinit var final: Instruction
@@ -39,16 +54,16 @@ class InstructionService {
     }
 
     private fun pageRequest(page: Int?,
-                    size: Int?,
-                    direction: Sort.Direction,
-                    sort_property:String): PageRequest =
+                            size: Int?,
+                            direction: Sort.Direction,
+                            sort_property: String): PageRequest =
             PageRequest.of(page!!, size!!, Sort.by(direction, sort_property))
 
     //  PATENT METHODS
     fun getPatents(page: Int? = 1,
                    size: Int? = 10,
                    direction: Sort.Direction,
-                   sort_property:String): Page<Patent> =
+                   sort_property: String): Page<Patent> =
             this.patentRepository.findAll(pageRequest(page, size, direction, sort_property))
 
     fun getPatent(id: UUID): Patent =
@@ -79,7 +94,7 @@ class InstructionService {
 
 
     fun applyPSearchAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_SearchAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -87,7 +102,7 @@ class InstructionService {
     }
 
     fun applyPAssignmentMergerAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_AssignmentMergerAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -95,7 +110,7 @@ class InstructionService {
     }
 
     fun applyPChangeOfAddressAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_ChangeOfAddressAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -103,7 +118,7 @@ class InstructionService {
     }
 
     fun applyPChangeOfNameAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_ChangeOfNameAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -111,7 +126,7 @@ class InstructionService {
     }
 
     fun applyPCTCAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_CTCAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -119,7 +134,7 @@ class InstructionService {
     }
 
     fun applyPProcurementOfCertificateAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_ProcurementOfCertificateAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -127,7 +142,7 @@ class InstructionService {
     }
 
     fun applyPRegistrationAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_RegistrationAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -135,7 +150,7 @@ class InstructionService {
     }
 
     fun applyPRenewalAction(
-            instruction_id:UUID,
+            instruction_id: UUID,
             action: P_RenewalAction): Instruction {
         val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
@@ -146,9 +161,9 @@ class InstructionService {
     //  TRADEMARK METHODS
 
     fun getTrademarks(page: Int? = 1,
-                   size: Int? = 10,
-                   direction: Sort.Direction,
-                   sort_property:String): Page<Trademark> =
+                      size: Int? = 10,
+                      direction: Sort.Direction,
+                      sort_property: String): Page<Trademark> =
             this.trademarkRepository.findAll(pageRequest(page, size, direction, sort_property))
 
     fun getTrademark(id: UUID): Trademark =
@@ -177,6 +192,23 @@ class InstructionService {
                     .delete(this.trademarkRepository.findById(id).get()) }
         catch (e: Exception){throw (e)}
     }
+
+    @Throws(IOException::class)
+    fun saveImage(file: MultipartFile): Image {
+        val fileName = StringUtils
+        .cleanPath(Objects.requireNonNull(file.originalFilename!!.replace("[()]|\\s+".toRegex(), "_")))
+
+        val fileStorageLocation: Path = Paths.get(UPLOAD_DIR)
+
+        val targetLocation = fileStorageLocation.resolve(fileName)
+
+        Files.copy(file.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
+
+        val response = Image(null, downloadUrl+fileName, fileName, file.size, file.contentType)
+
+        return imageRepository.save(response)
+    }
+
 }
 
 
