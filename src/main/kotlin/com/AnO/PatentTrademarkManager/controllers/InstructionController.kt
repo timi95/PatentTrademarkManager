@@ -6,9 +6,12 @@ import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @Api(value = "Instruction",
@@ -33,57 +36,61 @@ class InstructionController {
                     @RequestParam(defaultValue = "10") size:Int,
                     @RequestParam direction:Sort.Direction?,
                     @RequestParam(defaultValue = "id") sort_property:String?) =
-          this.instructionService
+          instructionService
                   .getPatents(page, size, direction=Sort.DEFAULT_DIRECTION, sort_property="id")
 
   @GetMapping("/patent/{id}")
   fun getPatent(@PathVariable id: UUID) =
-          this.instructionService.getPatent(id)
+          instructionService.getPatent(id)
 
 //  @ApiResponses(value = [
 //    ApiResponse(code = 200, message = "SUCCESS", response = Patent::class),
 //  ])
   @PostMapping("/patent")
   fun createPatent(@RequestBody patent: Patent) =
-          this.instructionService.createPatent(patent)
+          instructionService.createPatent(patent)
 
   @PutMapping("/patent/{id}")
   fun updatePatent(@PathVariable id:UUID, @RequestBody patent: Patent) =
-          this.instructionService.updatePatent(id,patent)
+          instructionService.updatePatent(id,patent)
 
   @DeleteMapping("/patent/{id}")
   fun deletePatent(@PathVariable id: UUID) =
-          this.instructionService.deletePatent(id)
+          instructionService.deletePatent(id)
 
   @PutMapping("/patent/{id}/search-action")
   fun applySearchAction(@PathVariable id: UUID, @RequestBody pAction: P_SearchAction) =
-          this.instructionService.applyPSearchAction(id, pAction)
+          instructionService.applyPSearchAction(id, pAction)
 
   @PutMapping("/patent/{id}/assignment-merger-action")
   fun applyPAssignmentMergerAction(@PathVariable id: UUID, @RequestBody pAction: P_AssignmentMergerAction) =
-          this.instructionService.applyPAssignmentMergerAction(id, pAction)
+          instructionService.applyPAssignmentMergerAction(id, pAction)
 
   @PutMapping("/patent/{id}/change-of-address-action")
   fun applyPChangeOfAddressAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfAddressAction) =
-          this.instructionService.applyPChangeOfAddressAction(id, pAction)
+          instructionService.applyPChangeOfAddressAction(id, pAction)
 
   @PutMapping("/patent/{id}/change-of-name-action")
   fun applyPChangeOfNameAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfNameAction) =
-          this.instructionService.applyPChangeOfNameAction(id, pAction)
+          instructionService.applyPChangeOfNameAction(id, pAction)
   
   @PutMapping("/patent/{id}/ctc-action")
   fun applyPCTCAction(@PathVariable id: UUID, @RequestBody pAction: P_CTCAction) =
-          this.instructionService.applyPCTCAction(id, pAction)
+          instructionService.applyPCTCAction(id, pAction)
 
   @PutMapping("/patent/{id}/procurement-of-certificate-action")
   fun applyPProcurementOfCertificateAction(@PathVariable id: UUID, @RequestBody pAction: P_ProcurementOfCertificateAction) =
-          this.instructionService.applyPProcurementOfCertificateAction(id, pAction)
+          instructionService.applyPProcurementOfCertificateAction(id, pAction)
 
   @PutMapping("/patent/{id}/registration-action")
   fun applyPRegistrationAction(@PathVariable id: UUID, @RequestBody pAction: P_RegistrationAction) =
-          this.instructionService.applyPRegistrationAction(id, pAction)
+          instructionService.applyPRegistrationAction(id, pAction)
 
   @PutMapping("/patent/{id}/renewal-action")
   fun applyPRenewalAction(@PathVariable id: UUID, @RequestBody pAction: P_RenewalAction) =
-          this.instructionService.applyPRenewalAction(id, pAction)
+          instructionService.applyPRenewalAction(id, pAction)
+
+  @PostMapping("/patent/{id}/image", consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+  fun applyPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
+          instructionService.applyPImage(id, multipartFile)
 }
