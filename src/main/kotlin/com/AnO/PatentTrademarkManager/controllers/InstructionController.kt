@@ -43,9 +43,6 @@ class InstructionController {
   fun getPatent(@PathVariable id: UUID) =
           instructionService.getPatent(id)
 
-//  @ApiResponses(value = [
-//    ApiResponse(code = 200, message = "SUCCESS", response = Patent::class),
-//  ])
   @PostMapping("/patent")
   fun createPatent(@RequestBody patent: Patent) =
           instructionService.createPatent(patent)
