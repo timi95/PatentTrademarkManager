@@ -51,9 +51,9 @@ class InstructionService {
     private fun saveInstruction(instruction: Instruction): Instruction{
         lateinit var final: Instruction
         if (instruction is Patent){
-            final = this.patentRepository.save(instruction)
+            final = patentRepository.save(instruction)
         } else if (instruction is Trademark){
-            final = this.trademarkRepository.save(instruction)
+            final = trademarkRepository.save(instruction)
         }
         return  final
     }
@@ -69,31 +69,31 @@ class InstructionService {
                    size: Int? = 10,
                    direction: Sort.Direction,
                    sort_property: String): Page<Patent> =
-            this.patentRepository.findAll(pageRequest(page, size, direction, sort_property))
+            patentRepository.findAll(pageRequest(page, size, direction, sort_property))
 
     fun getPatent(id: UUID): Patent =
-            this.patentRepository.findById(id).get()
+            patentRepository.findById(id).get()
 
 
     fun createPatent(patent: Patent): Patent? {
-        try { return this.patentRepository.save(patent.copy(action_list = mutableListOf<Action>())) }
+        try { return patentRepository.save(patent.copy(action_list = mutableListOf<Action>())) }
         catch (e: Exception){throw (e)}
     }
 
     fun updatePatent(id: UUID, patent: Patent): Patent? {
-        val check = this.patentRepository.findById(id)
+        val check = patentRepository.findById(id)
         if (!check.isPresent)
             throw(Exception("Patent of id:${id} does not exist"))
         try {
             val confirm  = patent.copy(id = id)
-            this.patentRepository.save(confirm)
+            patentRepository.save(confirm)
             return confirm
         } catch (e: Exception){throw (e)}
     }
 
      fun deletePatent(id: UUID):Unit?{
         try {
-            return this.patentRepository.deleteById(id) }
+            return patentRepository.deleteById(id) }
         catch (e: Exception){throw (e)}
     }
 
@@ -101,65 +101,65 @@ class InstructionService {
     fun applyPSearchAction(
             instruction_id: UUID,
             action: P_SearchAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPAssignmentMergerAction(
             instruction_id: UUID,
             action: P_AssignmentMergerAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPChangeOfAddressAction(
             instruction_id: UUID,
             action: P_ChangeOfAddressAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPChangeOfNameAction(
             instruction_id: UUID,
             action: P_ChangeOfNameAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPCTCAction(
             instruction_id: UUID,
             action: P_CTCAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPProcurementOfCertificateAction(
             instruction_id: UUID,
             action: P_ProcurementOfCertificateAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPRegistrationAction(
             instruction_id: UUID,
             action: P_RegistrationAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
     fun applyPRenewalAction(
             instruction_id: UUID,
             action: P_RenewalAction): Instruction {
-        val instruction: Instruction = this.patentRepository.findById(instruction_id).get()
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
-        return this.saveInstruction(instruction)
+        return saveInstruction(instruction)
     }
 
 
@@ -169,37 +169,37 @@ class InstructionService {
                       size: Int? = 10,
                       direction: Sort.Direction,
                       sort_property: String): Page<Trademark> =
-            this.trademarkRepository.findAll(pageRequest(page, size, direction, sort_property))
+            trademarkRepository.findAll(pageRequest(page, size, direction, sort_property))
 
     fun getTrademark(id: UUID): Trademark =
-            this.trademarkRepository.findById(id).get()
+            trademarkRepository.findById(id).get()
 
 
     fun createTrademark(trademark: Trademark): Trademark? {
-        try { return this.trademarkRepository.save(trademark.copy(action_list = mutableListOf<Action>())) }
+        try { return trademarkRepository.save(trademark.copy(action_list = mutableListOf<Action>())) }
         catch (e: Exception){throw (e)}
     }
 
     fun updateTrademark(id: UUID, trademark: Trademark): Trademark? {
-        val check = this.trademarkRepository.findById(id)
+        val check = trademarkRepository.findById(id)
         if (!check.isPresent)
              throw(Exception("Patent of id:${id} does not exist"))
         try {
             val confirm  = trademark.copy(id = id)
-            this.trademarkRepository.save(confirm)
+            trademarkRepository.save(confirm)
             return confirm
         } catch (e: Exception){throw (e)}
     }
 
     fun deleteTrademark(id: UUID):Unit?{
         try {
-            return this.trademarkRepository
-                    .delete(this.trademarkRepository.findById(id).get()) }
+            return trademarkRepository
+                    .delete(trademarkRepository.findById(id).get()) }
         catch (e: Exception){throw (e)}
     }
 
     @Throws(IOException::class)
-    fun saveImage(file: MultipartFile): Image {
+    fun saveImage(file: MultipartFile, instruction_id: UUID): Image {
         val fileName = StringUtils
         .cleanPath(Objects.requireNonNull(file.originalFilename!!.replace("[()]|\\s+".toRegex(), "_")))
 
@@ -209,7 +209,7 @@ class InstructionService {
 
         Files.copy(file.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
 
-        val response = Image(null, downloadUrl + fileName, fileName, file.size, file.contentType)
+        val response = Image(null, downloadUrl + fileName, fileName, file.size, file.contentType, instruction_id)
 
         return imageRepository.save(response)
     }
@@ -231,8 +231,36 @@ class InstructionService {
         return resource.file
     }
 
+    @Throws(MalformedURLException::class, FileNotFoundException::class)
+    fun deleteImage(id: UUID){
+        val image = imageRepository.findById(id).get()
+        try {
+            imageRepository.deleteById(id)
+        } catch (e: Exception){ throw(e) }
+        // if image successfully deleted delete file from server
+        if (!imageRepository.findById(id).isPresent) {
+            // get upload directory
+            val fileStorageLocation = Paths.get(UPLOAD_DIR)
+            // get File
+            val file: File = fileStorageLocation.resolve(image.imageName).toFile()
+            if (file.delete()) {
+               return imageRepository.delete(image)
+            }
+        }
+    }
     fun updateImage(){}
-    fun deleteImage(){}
+
+    fun applyPImage(id: UUID, multipartFile: MultipartFile): Instruction {
+        val patent = patentRepository.findById(id).get()
+        patent.image_list?.add(saveImage(multipartFile,id))
+        return saveInstruction(patent)
+    }
+
+    fun applyTImage(id: UUID, multipartFile: MultipartFile): Instruction {
+        val trademark = trademarkRepository.findById(id).get()
+        trademark.image_list?.add(saveImage(multipartFile,id))
+        return saveInstruction(trademark)
+    }
 
 }
 
