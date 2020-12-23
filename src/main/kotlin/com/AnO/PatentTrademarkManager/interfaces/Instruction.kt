@@ -1,5 +1,6 @@
 package com.AnO.PatentTrademarkManager.intefaces
 
+import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
 import com.AnO.PatentTrademarkManager.classes.Instructions.Trademark
 import com.fasterxml.jackson.annotation.JsonSubTypes
@@ -16,4 +17,6 @@ abstract class Instruction(
         @Id @GeneratedValue open val id: UUID?=null,
         open val type_id:String?=null,
         @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = false)
-        open val action_list: MutableList<Action>?=null)
+        open val action_list: MutableList<Action>?= mutableListOf(),
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = false)
+        open val image_list: MutableList<Image>?=mutableListOf())
