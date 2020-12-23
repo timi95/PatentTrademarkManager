@@ -12,4 +12,5 @@ data class Image(
         val pathString:String?=null,
         val imageName: String?=null,
         val imageSize: Long?=null,
-        val contentType: String?=null)
+        val contentType: String?=null,
+        val instruction_ref: UUID?=null)
