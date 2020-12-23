@@ -12,13 +12,18 @@ import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.io.Resource
+import org.springframework.core.io.UrlResource
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
+import java.io.FileNotFoundException
 import java.io.IOException
+import java.net.MalformedURLException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -204,10 +209,30 @@ class InstructionService {
 
         Files.copy(file.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
 
-        val response = Image(null, downloadUrl+fileName, fileName, file.size, file.contentType)
+        val response = Image(null, downloadUrl + fileName, fileName, file.size, file.contentType)
 
         return imageRepository.save(response)
     }
+
+
+    @Throws(MalformedURLException::class, FileNotFoundException::class)
+    fun retrieveImage(fileName: String): File {
+        // get upload directory
+        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
+
+        // get Path to download
+        val filePath = fileStorageLocation.resolve(fileName).normalize()
+
+        // Get Resource Url
+        val resource: Resource = UrlResource(filePath.toUri())
+        if (!resource.exists()) {
+            throw FileNotFoundException("File $fileName Not Found")
+        }
+        return resource.file
+    }
+
+    fun updateImage(){}
+    fun deleteImage(){}
 
 }
 
