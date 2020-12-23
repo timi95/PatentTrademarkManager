@@ -1,5 +1,6 @@
 package com.AnO.PatentTrademarkManager.classes.Instructions
 
+import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.fasterxml.jackson.annotation.JsonTypeName
@@ -14,6 +15,9 @@ data class Patent(
         override val type_id:String?=null,
         @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
         override val action_list: MutableList<Action>?= mutableListOf<Action>(),
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
+        override val image_list: MutableList<Image>?=mutableListOf(),
+
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
