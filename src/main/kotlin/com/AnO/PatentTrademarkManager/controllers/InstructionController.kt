@@ -88,6 +88,6 @@ class InstructionController {
           instructionService.applyPRenewalAction(id, pAction)
 
   @PostMapping("/patent/{id}/image", consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-  fun applyPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
-          instructionService.applyPImage(id, multipartFile)
+  fun addPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
+          instructionService.addPImage(id, multipartFile)
 }

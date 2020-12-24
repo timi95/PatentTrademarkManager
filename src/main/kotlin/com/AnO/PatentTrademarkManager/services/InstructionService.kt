@@ -250,7 +250,7 @@ class InstructionService {
     }
     fun updateImage(){}
 
-    fun applyPImage(id: UUID, multipartFile: MultipartFile): Instruction {
+    fun addPImage(id: UUID, multipartFile: MultipartFile): Instruction {
         val patent = patentRepository.findById(id).get()
         patent.image_list?.add(saveImage(multipartFile,id))
         return saveInstruction(patent)
