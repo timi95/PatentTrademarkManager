@@ -1,5 +1,6 @@
 package com.AnO.PatentTrademarkManager.classes.Instructions
 
+import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.fasterxml.jackson.annotation.JsonTypeName
@@ -12,6 +13,10 @@ import javax.persistence.*
 data class Trademark(
         @Id @GeneratedValue override val id: UUID?=null,
         override val type_id:String?=null,
+        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+        override val action_list: MutableList<Action>?=null,
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
+        override val image_list: MutableList<Image>?=mutableListOf(),
 
         val applicable_official_fee: LocalDateTime?=null,
         val applicable_service_charge: String?=null,
@@ -46,10 +51,7 @@ data class Trademark(
         val proprietors_address: String?=null,
         val quicktellers_fee: String?=null,
         val registration_no: String?=null,
-        val trademark_description: String?=null,
-
-        @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
-        override val action_list: MutableList<Action>?=null):Instruction()
+        val trademark_description: String?=null):Instruction()
 
 /*
 T_profile:any = {
