@@ -1,6 +1,7 @@
 package com.AnO.PatentTrademarkManager.classes.Instructions
 
 import com.AnO.PatentTrademarkManager.classes.Image
+import com.AnO.PatentTrademarkManager.classes.Opposition
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.fasterxml.jackson.annotation.JsonTypeName
@@ -17,6 +18,7 @@ data class Trademark(
         override val action_list: MutableList<Action>?=null,
         @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
         override val image_list: MutableList<Image>?=mutableListOf(),
+        val opposition_list:MutableList<Opposition>?= mutableListOf(),
 
         val applicable_official_fee: LocalDateTime?=null,
         val applicable_service_charge: String?=null,
