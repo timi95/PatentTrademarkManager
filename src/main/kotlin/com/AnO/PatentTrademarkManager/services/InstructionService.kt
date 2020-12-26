@@ -216,19 +216,33 @@ class InstructionService {
 
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
-    fun retrieveImage(fileName: String): File {
+    fun retrieveImageById(id: UUID): ByteArray {
+        val image = imageRepository.findById(id).get()
         // get upload directory
         val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
 
         // get Path to download
-        val filePath = fileStorageLocation.resolve(fileName).normalize()
+        val filePath = fileStorageLocation.resolve(image.imageName).normalize()
 
         // Get Resource Url
         val resource: Resource = UrlResource(filePath.toUri())
         if (!resource.exists()) {
-            throw FileNotFoundException("File $fileName Not Found")
+            throw FileNotFoundException("File $id Not Found")
         }
-        return resource.file
+        return Files.readAllBytes(filePath)
+    }
+
+    @Throws(MalformedURLException::class, FileNotFoundException::class)
+    fun retrieveImageByName(fileName: String): ByteArray {
+        val image = imageRepository.findByImageName(fileName).get()
+
+        // get upload directory
+        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
+
+        // get Path to download
+        val filePath = fileStorageLocation.resolve(image.imageName).normalize()
+
+        return Files.readAllBytes(filePath)
     }
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
