@@ -87,7 +87,20 @@ class InstructionController {
   fun applyPRenewalAction(@PathVariable id: UUID, @RequestBody pAction: P_RenewalAction) =
           instructionService.applyPRenewalAction(id, pAction)
 
+  @GetMapping("/image/{id}")
+  fun retrieveImageById(@PathVariable id: UUID) =
+          instructionService.retrieveImageById(id)
+
+  @GetMapping("/image")
+  fun retrieveImageByName(@RequestParam name: String) =
+          instructionService.retrieveImageByName(name)
+
   @PostMapping("/patent/{id}/image", consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
   fun addPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
           instructionService.addPImage(id, multipartFile)
+
+  @DeleteMapping("/image/{id}")
+  fun deleteImage(@PathVariable id:UUID) =
+          instructionService.deleteImage(id)
+
 }
