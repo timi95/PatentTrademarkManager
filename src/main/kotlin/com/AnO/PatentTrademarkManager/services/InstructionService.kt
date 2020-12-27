@@ -58,6 +58,17 @@ class InstructionService {
         return  final
     }
 
+    private fun retrieveInstruction(instruction_ref: UUID): Instruction {
+        if(patentRepository.findById(instruction_ref).isPresent){
+            try {
+                return patentRepository.findById(instruction_ref).get()
+            } catch (e: Exception) {throw e}
+        }
+        try {
+            return trademarkRepository.findById(instruction_ref).get()
+        } catch (e: Exception) {throw e}
+    }
+
     private fun pageRequest(page: Int?,
                             size: Int?,
                             direction: Sort.Direction,
@@ -244,23 +255,29 @@ class InstructionService {
 
         return Files.readAllBytes(filePath)
     }
+    @Throws(MalformedURLException::class, FileNotFoundException::class)
+    fun deleteImageByName(fileName: String){
+        // get upload directory
+        val fileStorageLocation = Paths.get(UPLOAD_DIR)
+        // get File
+        val file: File = fileStorageLocation.resolve(fileName).toFile()
+        try {
+            // delete File
+            file.deleteRecursively()
+        }catch (e: Exception) {throw(e)}
+    }
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
     fun deleteImage(id: UUID){
         val image = imageRepository.findById(id).get()
         try {
-            imageRepository.deleteById(id)
+            var instruction = image.instruction_ref?.let { retrieveInstruction(it) }
+            instruction?.image_list?.remove(image)
+            instruction?.let { saveInstruction(it) }
+            // delete File
+            image.imageName?.let { deleteImageByName(it) }
         } catch (e: Exception){ throw(e) }
-        // if image successfully deleted delete file from server
-        if (!imageRepository.findById(id).isPresent) {
-            // get upload directory
-            val fileStorageLocation = Paths.get(UPLOAD_DIR)
-            // get File
-            val file: File = fileStorageLocation.resolve(image.imageName).toFile()
-            if (file.delete()) {
-               return imageRepository.delete(image)
-            }
-        }
+
     }
     fun updateImage(){}
 
