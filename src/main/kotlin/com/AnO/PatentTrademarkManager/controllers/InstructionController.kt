@@ -103,8 +103,5 @@ class InstructionController {
   fun deleteImage(@PathVariable id:UUID) =
           instructionService.deleteImage(id)
 
-  @DeleteMapping("/image")
-  fun deleteImageByName(@RequestParam fileName: String) =
-          instructionService.deleteImageByName(fileName)
 
 }
