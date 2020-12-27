@@ -233,7 +233,7 @@ class InstructionService {
         val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
 
         // get Path to download
-        val filePath = fileStorageLocation.resolve(image.imageName).normalize()
+        val filePath = fileStorageLocation.resolve(image.imageName!!).normalize()
 
         // Get Resource Url
         val resource: Resource = UrlResource(filePath.toUri())
@@ -251,12 +251,12 @@ class InstructionService {
         val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
 
         // get Path to download
-        val filePath = fileStorageLocation.resolve(image.imageName).normalize()
+        val filePath = fileStorageLocation.resolve(image.imageName!!).normalize()
 
         return Files.readAllBytes(filePath)
     }
     @Throws(MalformedURLException::class, FileNotFoundException::class)
-    fun deleteImageByName(fileName: String){
+    private fun deleteImageByName(fileName: String){
         // get upload directory
         val fileStorageLocation = Paths.get(UPLOAD_DIR)
         // get File
@@ -269,10 +269,14 @@ class InstructionService {
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
     fun deleteImage(id: UUID){
+        // image entity
         val image = imageRepository.findById(id).get()
         try {
-            var instruction = image.instruction_ref?.let { retrieveInstruction(it) }
+            // retrieve associated instruction from instruction_ref on image entity
+            val instruction = image.instruction_ref?.let { retrieveInstruction(it) }
+            // remove image entity from image_list on instruction
             instruction?.image_list?.remove(image)
+            // save the mutated instruction
             instruction?.let { saveInstruction(it) }
             // delete File
             image.imageName?.let { deleteImageByName(it) }
