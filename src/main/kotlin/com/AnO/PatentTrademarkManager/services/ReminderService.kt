@@ -32,8 +32,8 @@ class ReminderService {
             try { reminderRepository.findById(id).get() }
             catch (e:Exception){throw e}
 
-    fun updateReminder(reminder: Reminder) =
-            try { reminderRepository.save(reminder.copy(id = reminder.id)) }
+    fun updateReminder(id: UUID, reminder: Reminder) =
+            try { reminderRepository.save(reminder.copy(id = id)) }
             catch (e: Exception){throw e}
 
     fun deleteReminder(id: UUID) =
