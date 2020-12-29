@@ -5,7 +5,10 @@ import com.AnO.PatentTrademarkManager.services.ReminderService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import java.time.Duration
+import java.time.LocalTime
 import java.util.*
 
 
@@ -43,4 +46,7 @@ class ReminderController {
     fun deleteReminder(@PathVariable id: UUID) =
             reminderService.deleteReminder(id)
 
+    @GetMapping("/reminder-sse" , produces = arrayOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+    fun remindersEvent() =
+            reminderService.remindersEvent()
 }
