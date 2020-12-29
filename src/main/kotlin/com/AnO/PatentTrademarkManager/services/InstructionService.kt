@@ -48,7 +48,7 @@ class InstructionService {
     @Autowired
     lateinit var imageRepository: ImageRepository
 
-    private fun saveInstruction(instruction: Instruction): Instruction{
+    private fun saveInstruction(instruction: Instruction): Instruction {
         lateinit var final: Instruction
         if (instruction is Patent){
             final = patentRepository.save(instruction)
@@ -80,7 +80,8 @@ class InstructionService {
                    size: Int? = 10,
                    direction: Sort.Direction,
                    sort_property: String): Page<Patent> =
-            patentRepository.findAll(pageRequest(page, size, direction, sort_property))
+            try{patentRepository.findAll(pageRequest(page, size, direction, sort_property)) }
+            catch (e:Exception){throw e}
 
     fun getPatent(id: UUID): Patent =
             patentRepository.findById(id).get()
@@ -88,7 +89,7 @@ class InstructionService {
 
     fun createPatent(patent: Patent): Patent? {
         try { return patentRepository.save(patent.copy(action_list = mutableListOf<Action>())) }
-        catch (e: Exception){throw (e)}
+        catch (e: Exception){throw e}
     }
 
     fun updatePatent(id: UUID, patent: Patent): Patent? {
@@ -99,13 +100,13 @@ class InstructionService {
             val confirm  = patent.copy(id = id)
             patentRepository.save(confirm)
             return confirm
-        } catch (e: Exception){throw (e)}
+        } catch (e: Exception){throw e}
     }
 
      fun deletePatent(id: UUID):Unit?{
         try {
             return patentRepository.deleteById(id) }
-        catch (e: Exception){throw (e)}
+        catch (e: Exception){throw e}
     }
 
 
@@ -188,7 +189,7 @@ class InstructionService {
 
     fun createTrademark(trademark: Trademark): Trademark? {
         try { return trademarkRepository.save(trademark.copy(action_list = mutableListOf<Action>())) }
-        catch (e: Exception){throw (e)}
+        catch (e: Exception){throw e}
     }
 
     fun updateTrademark(id: UUID, trademark: Trademark): Trademark? {
@@ -199,14 +200,14 @@ class InstructionService {
             val confirm  = trademark.copy(id = id)
             trademarkRepository.save(confirm)
             return confirm
-        } catch (e: Exception){throw (e)}
+        } catch (e: Exception){throw e}
     }
 
     fun deleteTrademark(id: UUID):Unit?{
         try {
             return trademarkRepository
                     .delete(trademarkRepository.findById(id).get()) }
-        catch (e: Exception){throw (e)}
+        catch (e: Exception){throw e}
     }
 
     @Throws(IOException::class)
