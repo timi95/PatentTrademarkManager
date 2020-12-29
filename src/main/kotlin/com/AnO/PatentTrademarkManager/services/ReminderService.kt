@@ -1,10 +1,10 @@
 package com.AnO.PatentTrademarkManager.services
 
 import com.AnO.PatentTrademarkManager.classes.Reminder
+import com.AnO.PatentTrademarkManager.classes.Utility.Utility.pageRequest
 import com.AnO.PatentTrademarkManager.repositories.ReminderRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.util.*
@@ -13,12 +13,6 @@ import java.util.*
 class ReminderService {
     @Autowired
     lateinit var reminderRepository: ReminderRepository
-
-    private fun pageRequest(page: Int?,
-                            size: Int?,
-                            direction: Sort.Direction,
-                            sort_property: String): PageRequest =
-            PageRequest.of(page!!, size!!, Sort.by(direction, sort_property))
 
 //    Reminder CRUD
     fun createReminder(reminder: Reminder): Reminder {

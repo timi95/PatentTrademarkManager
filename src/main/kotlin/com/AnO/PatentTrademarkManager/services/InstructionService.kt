@@ -10,12 +10,12 @@ import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActi
 import com.AnO.PatentTrademarkManager.repositories.ImageRepository
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
+import com.AnO.PatentTrademarkManager.classes.Utility.Utility.pageRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.core.io.UrlResource
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
@@ -69,11 +69,6 @@ class InstructionService {
         } catch (e: Exception) {throw e}
     }
 
-    private fun pageRequest(page: Int?,
-                            size: Int?,
-                            direction: Sort.Direction,
-                            sort_property: String): PageRequest =
-            PageRequest.of(page!!, size!!, Sort.by(direction, sort_property))
 
     //  PATENT METHODS
     fun getPatents(page: Int? = 1,
