@@ -10,6 +10,7 @@ import org.springframework.http.codec.ServerSentEvent
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import java.time.Duration
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.*
 
@@ -48,13 +49,24 @@ class ReminderService {
 
     //Streams
 
+    private fun remindersMatured(): MutableList<Reminder> {
+        var maturedReminders = mutableListOf<Reminder>()
+
+        reminderRepository.findAll().forEach {
+            if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
+                maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
+            } }
+        return maturedReminders
+    }
+
     fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
-        return Flux.interval(Duration.ofSeconds(1))
+        return Flux.interval(Duration.ofSeconds(5))
                 .map { sequence: Long ->
+
                     ServerSentEvent.builder<List<Reminder>>()
                             .id(sequence.toString())
                             .event("periodic-event")
-                            .data(reminderRepository.findAll())
+                            .data(remindersMatured())
                             .build()
                 }
     }
