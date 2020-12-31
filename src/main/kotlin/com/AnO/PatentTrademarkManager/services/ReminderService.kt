@@ -3,6 +3,8 @@ package com.AnO.PatentTrademarkManager.services
 import com.AnO.PatentTrademarkManager.classes.Reminder
 import com.AnO.PatentTrademarkManager.classes.Utility.Utility.pageRequest
 import com.AnO.PatentTrademarkManager.repositories.ReminderRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
@@ -13,6 +15,7 @@ import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.*
+import javax.xml.bind.JAXBElement
 
 
 @Service
@@ -49,24 +52,26 @@ class ReminderService {
 
     //Streams
 
-    private fun remindersMatured(): MutableList<Reminder> {
+    private fun remindersMatured(): List<Reminder> {
         var maturedReminders = mutableListOf<Reminder>()
+        GlobalScope.launch {
+            reminderRepository.findAll().forEach {
+                if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
+                    maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
+                } }
+        }
 
-        reminderRepository.findAll().forEach {
-            if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
-                maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
-            } }
         return maturedReminders
     }
 
     fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
         return Flux.interval(Duration.ofSeconds(5))
                 .map { sequence: Long ->
-
+                    remindersMatured()
                     ServerSentEvent.builder<List<Reminder>>()
                             .id(sequence.toString())
                             .event("periodic-event")
-                            .data(remindersMatured())
+                            .data(reminderRepository.findAll())
                             .build()
                 }
     }
