@@ -46,7 +46,15 @@ class ReminderController {
     fun deleteReminder(@PathVariable id: UUID) =
             reminderService.deleteReminder(id)
 
-    @GetMapping("/reminder-sse" , produces = arrayOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+    @GetMapping("/reminder-sse")
     fun remindersEvent() =
             reminderService.remindersEvent()
+
+    @GetMapping("/subscribe", consumes = arrayOf(MediaType.ALL_VALUE))
+    fun subscribeEvent() =
+            reminderService.subscribeEvent()
+
+    @PostMapping("/reminder-event-dispatch")
+    fun dispatchEvent(@RequestBody reminder: Reminder) =
+            reminderService.dispatchEvent(reminder)
 }
