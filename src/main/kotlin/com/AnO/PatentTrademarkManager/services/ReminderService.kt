@@ -12,6 +12,7 @@ import org.springframework.http.codec.ServerSentEvent
 import org.springframework.stereotype.Service
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter
 import reactor.core.publisher.Flux
+import reactor.core.publisher.toMono
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -55,30 +56,20 @@ class ReminderService {
 
     //Streams
 
-    private fun remindersMatured(): List<Reminder> {
-        var maturedReminders = mutableListOf<Reminder>()
-        GlobalScope.launch {
-            reminderRepository.findAll().forEach {
-                if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
-                    maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
-                } }
-        }
 
-        return maturedReminders
-    }
 
-    fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
-
-        return Flux.interval(Duration.ofSeconds(5))
-                .map { sequence: Long ->
-                    remindersMatured()
-                    ServerSentEvent.builder<List<Reminder>>()
-                            .id(sequence.toString())
-                            .event("periodic-event")
-                            .data(reminderRepository.findAll())
-                            .build()
-                }
-    }
+//    fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
+//
+//        return Flux.interval(Duration.ofSeconds(5))
+//                .map { sequence: Long ->
+//                    remindersMatured()
+//                    ServerSentEvent.builder<List<Reminder>>()
+//                            .id(sequence.toString())
+//                            .event("periodic-event")
+//                            .data(reminderRepository.findAll())
+//                            .build()
+//                }
+//    }
 
     fun subscribeEvent(): SseEmitter {
         val emitter = SseEmitter(Long.MAX_VALUE)
@@ -91,6 +82,7 @@ class ReminderService {
         emitter.onCompletion{ emitters.remove(emitter) }
         emitter.onTimeout { emitters.remove(emitter) }
         emitters.add(emitter)
+        GlobalScope.launch { reminderAnalysis() }
         return emitter
     }
 
@@ -107,9 +99,24 @@ class ReminderService {
         }
     }
 
-    fun reminderAnalysis(){
-        while (true){
-
+    private fun remindersMatured(): List<Reminder> {
+        var maturedReminders = mutableListOf<Reminder>()
+        GlobalScope.launch {
+            reminderRepository.findAll().forEach {
+                if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
+                    maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
+                }
+                dispatchEvent(it)
+            }
         }
+        return maturedReminders
     }
+
+    suspend fun reminderAnalysis(){
+        if (emitters.isEmpty())
+            return
+        remindersMatured()
+        reminderAnalysis()
+    }
+
 }
