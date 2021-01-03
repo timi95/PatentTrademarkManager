@@ -56,48 +56,19 @@ class ReminderService {
 
     //Streams
 
+    fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
 
-
-//    fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
-//
-//        return Flux.interval(Duration.ofSeconds(5))
-//                .map { sequence: Long ->
-//                    remindersMatured()
-//                    ServerSentEvent.builder<List<Reminder>>()
-//                            .id(sequence.toString())
-//                            .event("periodic-event")
-//                            .data(reminderRepository.findAll())
-//                            .build()
-//                }
-//    }
-
-    fun subscribeEvent(): SseEmitter {
-        val emitter = SseEmitter(Long.MAX_VALUE)
-        try {
-            emitter.send{SseEmitter.event().name("INIT")}
-        } catch (e: Exception){
-            throw e
-            emitter.onError{ emitters.remove(emitter) }
-        }
-        emitter.onCompletion{ emitters.remove(emitter) }
-        emitter.onTimeout { emitters.remove(emitter) }
-        emitters.add(emitter)
-        GlobalScope.launch { reminderAnalysis() }
-        return emitter
+        return Flux.interval(Duration.ofSeconds(5))
+                .map { sequence: Long ->
+                    remindersMatured()
+                    ServerSentEvent.builder<List<Reminder>>()
+                            .id(sequence.toString())
+                            .event("periodic-event")
+                            .data(reminderRepository.findAll())
+                            .build()
+                }
     }
 
-    fun dispatchEvent(reminder: Reminder){
-        emitters.forEach {
-            try {
-              it.send{SseEmitter.event()
-                      .name("reminder-event")
-                      .data(reminder)}
-            } catch (e: Exception){
-                throw e
-                emitters.remove(it)
-            }
-        }
-    }
 
     private fun remindersMatured(): List<Reminder> {
         var maturedReminders = mutableListOf<Reminder>()
@@ -106,17 +77,11 @@ class ReminderService {
                 if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
                     maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
                 }
-                dispatchEvent(it)
             }
         }
         return maturedReminders
     }
 
-    suspend fun reminderAnalysis(){
-        if (emitters.isEmpty())
-            return
-        remindersMatured()
-        reminderAnalysis()
-    }
+
 
 }
