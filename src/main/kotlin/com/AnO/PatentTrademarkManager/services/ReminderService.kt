@@ -57,7 +57,6 @@ class ReminderService {
     //Streams
 
     fun remindersEvent(): Flux<ServerSentEvent<List<Reminder>>>? {
-
         return Flux.interval(Duration.ofSeconds(5))
                 .map { sequence: Long ->
                     remindersMatured()
@@ -70,16 +69,12 @@ class ReminderService {
     }
 
 
-    private fun remindersMatured(): List<Reminder> {
-        var maturedReminders = mutableListOf<Reminder>()
-        GlobalScope.launch {
-            reminderRepository.findAll().forEach {
-                if(!it.is_matured!! && it.reminder_date_time!!.isBefore(LocalDateTime.now())){
-                    maturedReminders.add(reminderRepository.save(it.copy(is_matured = true)))
-                }
+    private fun remindersMatured(){
+        reminderRepository.findAll().map {
+            if(!it.is_matured!! || it.reminder_date_time!!.isBefore(LocalDateTime.now())){
+                reminderRepository.save(it.copy(is_matured = true))
             }
         }
-        return maturedReminders
     }
 
 
