@@ -6,7 +6,10 @@ import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.http.MediaType
+import org.springframework.http.MediaType.APPLICATION_STREAM_JSON_VALUE
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter
 import java.time.Duration
 import java.time.LocalTime
 import java.util.*
@@ -15,7 +18,7 @@ import java.util.*
 @Api(value = "Reminder",
         description = "Rest API for Reminders",
         tags = ["Reminder"])
-@CrossOrigin(origins = arrayOf("http://localhost:4200"))
+@CrossOrigin(origins = arrayOf("http://localhost:4200","*"))
 @RestController
 @RequestMapping("/Reminder")
 class ReminderController {
@@ -50,5 +53,8 @@ class ReminderController {
     fun remindersEvent() =
             reminderService.remindersEvent()
 
+
+    @GetMapping("/subscribe", consumes = arrayOf(MediaType.ALL_VALUE))
+    fun subscribe() = reminderService.subscribe(SseEmitter(Long.MAX_VALUE))
 
 }

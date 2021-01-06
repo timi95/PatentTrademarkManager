@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
 import org.springframework.http.codec.ServerSentEvent
+import org.springframework.scheduling.annotation.Async
+import org.springframework.scheduling.annotation.EnableScheduling
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter
 import reactor.core.publisher.Flux
 import reactor.core.publisher.toMono
+import java.io.IOException
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -21,6 +25,7 @@ import javax.xml.bind.JAXBElement
 
 
 @Service
+@EnableScheduling
 class ReminderService {
 
     var emitters: MutableList<SseEmitter> = mutableListOf()
@@ -68,7 +73,6 @@ class ReminderService {
                 }
     }
 
-
     private fun remindersMatured(){
         reminderRepository.findAll().map {
             if(!it.is_matured!! || it.reminder_date_time!!.isBefore(LocalDateTime.now())){
@@ -77,6 +81,39 @@ class ReminderService {
         }
     }
 
+    companion object {
+        val subscribers: MutableSet<SseEmitter> = hashSetOf()
+    }
+    fun subscribe(subscriber: SseEmitter): SseEmitter {
+        subscribers.add(subscriber)
+        println("subscription called! $subscriber")
+        return subscriber
+    }
 
+    fun notifySubscribers(reminder: Reminder) {
+        try {
+            subscribers.forEach { subscriber ->
+                subscriber.send(reminder)
+                subscriber.onError { error ->
+                    println("Seems the subscriber has already dropped out. Remove it from the list")
+                    subscriber.completeWithError(error)
+                    subscribers.remove(subscriber)
+                }
+            }
+        } catch (ioException: IOException) { throw  ioException }
+    }
 
+    @Async
+    @Scheduled(fixedRate = 1500)
+    fun checkReminders(){
+        val reminders = reminderRepository.findAll()
+        reminders.forEach {
+            if (LocalDateTime.now().isAfter(it.reminder_date_time) && !it.is_matured!!){
+                notifySubscribers(it)
+                println("matured reminders notified! ${it.reminder_date_time}")
+                reminderRepository.save(it.copy(is_matured = true))
+                println("matured reminders saved!")
+            }
+        }
+    }
 }
