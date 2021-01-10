@@ -11,6 +11,6 @@ data class Reminder(@GeneratedValue @Id val id: UUID?=null,
                     val instruction_ref:UUID?=null,
                     val reminder_creation_time: LocalDateTime = LocalDateTime.now(),
                     val reminder_date_time: LocalDateTime?=null,
-                    val is_matured: Boolean?=false,
+                    val is_matured: Boolean?=null,
                     val reminder_message_title:String?=null,
                     val reminder_message_body:String?=null)
