@@ -109,7 +109,7 @@ class ReminderService {
         val reminders = reminderRepository.findAll()
         reminders.forEach {
             if (LocalDateTime.now().isAfter(it.reminder_date_time) && !it.is_matured!!){
-                notifySubscribers(it)
+                notifySubscribers(it.copy(is_matured = true))
                 println("matured reminders notified! ${it.reminder_date_time}")
                 reminderRepository.save(it.copy(is_matured = true))
                 println("matured reminders saved!")
