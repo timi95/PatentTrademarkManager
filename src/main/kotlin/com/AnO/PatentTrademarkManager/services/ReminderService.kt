@@ -82,24 +82,19 @@ class ReminderService {
     }
 
     companion object {
-        val subscribers: MutableSet<SseEmitter> = hashSetOf()
+        lateinit var primarySubscriber: SseEmitter
     }
+
     fun subscribe(subscriber: SseEmitter): SseEmitter {
-        subscribers.add(subscriber)
+        primarySubscriber = subscriber
         println("subscription called! $subscriber")
         return subscriber
     }
 
     fun notifySubscribers(reminder: Reminder) {
         try {
-            subscribers.forEach { subscriber ->
-                subscriber.send(reminder)
-                subscriber.onError { error ->
-                    println("Seems the subscriber has already dropped out. Remove it from the list")
-                    subscriber.completeWithError(error)
-                    subscribers.remove(subscriber)
-                }
-            }
+            primarySubscriber.send(reminder)
+            primarySubscriber.onError{error -> primarySubscriber.completeWithError(error)}
         } catch (ioException: IOException) { throw  ioException }
     }
 
