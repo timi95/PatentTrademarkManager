@@ -21,14 +21,3 @@ data class P_CTCAction(
         val ctc_required: String?=null,
         val ctc_procurement_status: String?=null,
         val patent_registration_no: String?=null, ): Action()
-
-/*
-CTCAction {
-application_no:
-patent_registration_no:
-ctc_required:
-date_applied_for_ctc:
-ctc_procurement_status:
-clerk_responsible:
-}
- */
