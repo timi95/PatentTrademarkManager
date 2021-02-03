@@ -18,13 +18,3 @@ data class P_SearchAction(
         val date_incoming_abuja_schedule: LocalDateTime?=null,
         val search_status: String?=null,
         val reported_to_client: String?=null,): Action()
-
-
-/*
-SearchAction {
-search_status:
-reported_to_client:
-date_reported_to_client:
-clerk_searching:
-}
-*/
