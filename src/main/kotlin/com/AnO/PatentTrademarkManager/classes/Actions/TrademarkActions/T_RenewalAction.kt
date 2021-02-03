@@ -14,17 +14,8 @@ data class T_RenewalAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
 
-//        val date_renewal_cert_facilitation_sent: LocalDateTime?=null,
-//        val date_abj_instructed_renewal: LocalDateTime?=null,
-//        val date_renew_cert_received: LocalDateTime?=null,
-//        val next_renewal_due_date: LocalDateTime?=null,
-//        val next_renewal_due_month: String?=null,
         val official_fee_renewal: String?=null,
-//        val renewal_cert_facilitation_sent: String?=null,
         val renewal_due_date: LocalDateTime?=null,
-//        val renewal_due_month: String?=null,
-//        val renewal_instruction_date: LocalDateTime?=null,
-//        val renewal_instruction_month: String?=null,
         val renewal_status: String?=null): Action()
 
 /*
