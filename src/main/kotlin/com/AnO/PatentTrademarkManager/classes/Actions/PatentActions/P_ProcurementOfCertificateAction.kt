@@ -21,19 +21,3 @@ data class P_ProcurementOfCertificateAction(
         val invention_description: String?=null,
         val procurement_status: String?=null,
         val patent_registration_no: String?=null,): Action()
-/*
-ProcurementOfCertificateAction {
-date_procurement_instructed:
-application_no:
-invention_description:
-clerk_procuring:
-month_clerk_instructed:
-procurement_status:
-date_cert_procured:
-patent_regtn_no:
-date_cert_procurement_due:
-month_cert_procurement_due:
-}
-
-
-*/
