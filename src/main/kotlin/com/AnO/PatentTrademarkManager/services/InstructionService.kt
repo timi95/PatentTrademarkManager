@@ -2,8 +2,8 @@ package com.AnO.PatentTrademarkManager.services
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Image
-import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
-import com.AnO.PatentTrademarkManager.classes.Instructions.Trademark
+import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
+import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.AnO.PatentTrademarkManager.intefaces.Action
 import com.AnO.PatentTrademarkManager.intefaces.Instruction
 import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository

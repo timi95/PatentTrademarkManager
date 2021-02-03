@@ -1,4 +1,4 @@
-package com.AnO.PatentTrademarkManager.classes.Instructions
+package com.AnO.PatentTrademarkManager.classes.Profiles
 
 import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.intefaces.Action

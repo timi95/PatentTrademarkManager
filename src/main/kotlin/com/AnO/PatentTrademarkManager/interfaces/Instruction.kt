@@ -1,8 +1,8 @@
 package com.AnO.PatentTrademarkManager.intefaces
 
 import com.AnO.PatentTrademarkManager.classes.Image
-import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
-import com.AnO.PatentTrademarkManager.classes.Instructions.Trademark
+import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
+import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import java.util.*

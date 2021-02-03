@@ -2,11 +2,9 @@ package com.AnO.PatentTrademarkManager.controllers
 
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
-import com.AnO.PatentTrademarkManager.classes.Instructions.Patent
-import com.AnO.PatentTrademarkManager.intefaces.Instruction
+import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
-import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.http.MediaType
