@@ -17,17 +17,10 @@ data class P_ProcurementOfCertificateAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
 
-//        val date_procurement_instructed: LocalDateTime?=null,
         val application_no: String?=null,
         val invention_description: String?=null,
-//        val clerk_procuring: String?=null,
-//        val month_clerk_instructed: String?=null,
         val procurement_status: String?=null,
-//        val date_cert_procured: LocalDateTime?=null,
-        val patent_registration_no: String?=null,
-//        val date_cert_procurement_due: LocalDateTime?=null,
-//        val month_cert_procurement_due: String?=null
-): Action()
+        val patent_registration_no: String?=null,): Action()
 /*
 ProcurementOfCertificateAction {
 date_procurement_instructed:
