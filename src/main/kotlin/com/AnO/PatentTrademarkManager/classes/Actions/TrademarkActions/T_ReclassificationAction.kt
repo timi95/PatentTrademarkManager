@@ -9,11 +9,18 @@ import javax.persistence.Entity
 @JsonTypeName("reclassification")
 data class T_ReclassificationAction(
 
-        val date_reclassification_instruction: LocalDateTime?=null,
-        val date_abj_instructed_reclassify: LocalDateTime?=null,
+        val date_instruction: LocalDateTime?=null,
+        val date_instruction_concluded: LocalDateTime?=null,
+        val date_outgoing_abuja_schedule: LocalDateTime?=null,
+        val date_incoming_abuja_schedule: LocalDateTime?=null,
+
+//        val date_reclassification_instruction: LocalDateTime?=null,
+//        val date_abj_instructed_reclassify: LocalDateTime?=null,
         val reclassification_status: String?=null,
-        val date_publication_of_reclassification: LocalDateTime?=null,
-        val journal_pg_reclassification: String?=null,): Action()
+        val journal_no:String?=null,
+        val journal_vol:String?=null,
+        val journal_date:LocalDateTime?=null,
+        val journal_page:String?=null,): Action()
 
 /*
 T_reclassification_action:any = {
