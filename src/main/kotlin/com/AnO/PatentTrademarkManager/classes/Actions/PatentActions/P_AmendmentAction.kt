@@ -19,15 +19,5 @@ data class P_AmendmentAction(
 
         val nature_of_amendment:String?=null,
         val status_of_amendment:String?=null, ): Action()
-/*
-AmendmentAction {
-date_amendment_instruction_received:
-nature_of_amendment:
-amending_clerk:
-date_amending_clerk_instructed:
-status_of_amendment:
-date_amendment_received
-}
 
- */
 
