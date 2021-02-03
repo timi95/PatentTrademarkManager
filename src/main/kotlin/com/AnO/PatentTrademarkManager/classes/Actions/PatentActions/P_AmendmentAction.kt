@@ -12,14 +12,13 @@ data class P_AmendmentAction(
         private val type_id:String?=null,
         override var instruction_ref: UUID?=null,
 
-        val nature_of_amendment:String?=null,
-//        val amending_clerk:String?=null,
-//        val date_amending_clerk_instructed:LocalDateTime?=null,
-        val status_of_amendment:String?=null,
         val date_instruction: LocalDateTime?=null,
         val date_instruction_concluded: LocalDateTime?=null,
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
-        val date_incoming_abuja_schedule: LocalDateTime?=null,): Action()
+        val date_incoming_abuja_schedule: LocalDateTime?=null,
+
+        val nature_of_amendment:String?=null,
+        val status_of_amendment:String?=null, ): Action()
 /*
 AmendmentAction {
 date_amendment_instruction_received:
