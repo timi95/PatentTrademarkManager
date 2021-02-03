@@ -19,14 +19,3 @@ data class T_AmendmentAction(
 
         val nature_of_amendment:String?=null,
         val status_of_amendment:String?=null, ): Action()
-
-/*
-T_amendment_action:any = {
-        amendment_instruction_date:
-        date_amendment_instruction_received:
-        nature_of_amendment:
-        date_amending_clerk_instructed:
-        status_of_amendment:
-        date_amendment_received: ""
-};
- */
