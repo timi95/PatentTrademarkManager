@@ -19,14 +19,3 @@ data class P_ChangeOfNameAction(
 
         val new_name_of_patentee: String?=null,
         val status_of_change_of_name: String?=null,): Action()
-
-/*
-ChangeOfNameAction {
-change_of_name_instruction_date:
-change_of_name_instruction_month:
-new_name_of_patentee:
-clerk_for_change_of_name:
-status_of_change_of_name:
-date_received_change_of_name_certificate:
-}
-*/
