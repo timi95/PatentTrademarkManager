@@ -23,19 +23,3 @@ data class P_AssignmentMergerAction(
         val assignee_address:String?=null,
         val official_fee_assignment:String?=null, ): Action()
 
-/*
-AssignmentMergerAction {
-assignment_instruction_date:
-assignment_instruction_month:
-date_abuja_instructed_assignment:
-clerk_assignment:
-status_assignment_registrations:
-assignor:
-assignor_address:
-assignee:
-assignee_address:
-date_assignment_certificate_received:
-}
-
-
- */
