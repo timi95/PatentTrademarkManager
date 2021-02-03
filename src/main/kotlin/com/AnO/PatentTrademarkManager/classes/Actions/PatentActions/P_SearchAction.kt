@@ -17,10 +17,7 @@ data class P_SearchAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
         val search_status: String?=null,
-        val reported_to_client: String?=null,
-//        val date_reported_to_client: LocalDateTime?=null,
-//        val clerk_searching: String?=null
-        ): Action()
+        val reported_to_client: String?=null,): Action()
 
 
 /*
