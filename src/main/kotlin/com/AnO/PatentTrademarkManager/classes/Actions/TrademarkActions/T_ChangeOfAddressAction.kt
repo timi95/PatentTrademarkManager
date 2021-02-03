@@ -13,10 +13,6 @@ data class T_ChangeOfAddressAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
 
-//        val change_of_address_instruction_date: LocalDateTime?=null,
-//        val change_of_name_instruction_date: LocalDateTime?=null,
-//        val date_received_change_of_address_certificate:LocalDateTime?=null,
-//        val date_received_change_of_name_certificate: LocalDateTime?=null,
         val new_address_of_proprietor: String?=null,
         val new_name_of_proprietor: String?=null,
         val official_fee_change_name:String?=null,
