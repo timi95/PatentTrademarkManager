@@ -19,13 +19,3 @@ data class T_ReclassificationAction(
         val journal_vol:String?=null,
         val journal_date:LocalDateTime?=null,
         val journal_page:String?=null,): Action()
-
-/*
-T_reclassification_action:any = {
-    date_reclassification_instruction:
-    date_abj_instructed_reclassify:
-    reclassification_status:
-    date_publication_of_reclassification:
-    journal_pg_reclassification:
-};
- */
