@@ -23,21 +23,3 @@ data class T_AssignmentMergerAction(
         val assignee:String?=null,
         val assignee_address:String?=null,
         val official_fee_assignment:String?=null,): Action()
-
-/*
-T_assignment_merger_action: any = {
-    assignment_instruction_date:
-    assignment_instruction_month:
-    assignee:
-    assignee_address:
-    assignor:
-    assignor_address:
-    clerk_assigning:
-    date_abuja_instructed_assignment:
-    date_assignment_certificate_received:
-    date_facillitation_assignment_cert_sent:
-    date_facillitation_assignment_cert_sent_sent:
-    official_fee_assignment:
-    status_assignment_registrations:
-}
- */
