@@ -17,32 +17,10 @@ data class P_RenewalAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
 
-//        val date_registration_instruction_received: LocalDateTime?=null,
-//        val month_registration_instruction_received: String?=null,
-//        val clerk_registration: String?=null,
-//        val date_abuja_instructed_for_registration: LocalDateTime?=null,
-//        val convention_priority_ref_1: String?=null,
-//        val convention_priority_date_1: LocalDateTime?=null,
-//        val convention_priority_ref_2: String?=null,
-//        val convention_priority_date_2: LocalDateTime?=null,
-//        val convention_priority_ref_3: String?=null,
-//        val convention_priority_date_3: LocalDateTime?=null,
         val renewal_due_date: LocalDateTime?=null,
-
-//        val PCT_ref_no: String?=null,
-//        val PCT_filling_date: LocalDateTime?=null,
         val application_no: String?=null,
-//        val patent_registration_filling_date: LocalDateTime?=null,
-//        val registration_filling_month: String?=null,
-//        val registration_status: String?=null,
-//        val acknowledgement_status: String?=null,
-//        val acceptance_date: LocalDateTime?=null,
         val cert_procurement_date: LocalDateTime?=null,
-//        val cert_procurement_month: String?=null,
         val patent_registration_no: String?=null,
-//        val correspondence_date: LocalDateTime?=null,
-//        val date_of_instruction: LocalDateTime?=null,
-//        val clients_contact_person: String?=null,
         val official_fee_renewal: String?=null): Action()
 
 /*
