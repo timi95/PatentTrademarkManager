@@ -14,8 +14,6 @@ data class T_ReclassificationAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
 
-//        val date_reclassification_instruction: LocalDateTime?=null,
-//        val date_abj_instructed_reclassify: LocalDateTime?=null,
         val reclassification_status: String?=null,
         val journal_no:String?=null,
         val journal_vol:String?=null,
