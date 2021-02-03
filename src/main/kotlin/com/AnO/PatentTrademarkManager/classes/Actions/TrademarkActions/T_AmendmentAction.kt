@@ -17,13 +17,8 @@ data class T_AmendmentAction(
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
 
-//        val date_amendment_instruction_received: LocalDateTime?=null,
         val nature_of_amendment:String?=null,
-//        val amending_clerk:String?=null,
-//        val date_amending_clerk_instructed: LocalDateTime?=null,
-        val status_of_amendment:String?=null,
-//        val date_amendment_received: LocalDateTime?=null
-): Action()
+        val status_of_amendment:String?=null, ): Action()
 
 /*
 T_amendment_action:any = {
