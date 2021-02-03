@@ -18,14 +18,3 @@ data class P_ChangeOfAddressAction(
         val date_instruction_concluded: LocalDateTime?=null,
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,): Action()
-
-/*
-ChangeOfAddressAction {
-change_of_address_instruction_date:
-change_of_address_instruction_month:
-new_address_of_patentee:
-clerk_of_change_of_address:
-status_change_of_address:
-date_received_change_of_address_certificate:
-}
-*/
