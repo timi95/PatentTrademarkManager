@@ -16,10 +16,8 @@ data class P_ChangeOfNameAction(
         val date_instruction_concluded: LocalDateTime?=null,
         val date_outgoing_abuja_schedule: LocalDateTime?=null,
         val date_incoming_abuja_schedule: LocalDateTime?=null,
-//        val change_of_name_instruction_date: LocalDateTime?=null,
-//        val change_of_name_instruction_month: String?=null,
+
         val new_name_of_patentee: String?=null,
-//        val clerk_for_change_of_name: String?=null,
         val status_of_change_of_name: String?=null,): Action()
 
 /*
