@@ -34,34 +34,3 @@ data class P_RegistrationAction(
         val cert_procurement_date: LocalDateTime?=null,
         val patent_registration_no: String?=null,
         val official_fee_registration: String?=null,): Action()
-
-/*
-RegistrationAction {
-date_registration_instruction_received:
-month_registration_instruction_received:
-clerk_registration:
-date_abuja_instructed_for_registration:
-convention_priority_ref_1:
-convention_priority_date_1:
-convention_priority_ref_2:
-convention_priority_date_2:
-convention_priority_ref_3:
-convention_priority_date_3:
-PCT_ref_no:
-PCT_filling_date:
-filling_deadline:
-application_no:
-patent_registration_filling_date:
-registration_filling_month:
-registration_status:
-acknowledgement_status:
-acceptance_date:
-cert_procurement_date:
-cert_procurment_month:
-patent_registration_no:
-correspondence_date:
-date_of_instruction:
-clients_contact_person:
-official_fee_registration:
-}
- */
