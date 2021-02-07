@@ -22,6 +22,8 @@ data class Patent(
         val registration_date: LocalDateTime?=null,
         val invention_title: String?=null,
         val application_number: String?=null,
+        val patentee_name: String?=null,
+        val patentee_address: String?=null,
 
         val our_reference_number: String?=null,
         val client_id: String?=null,
@@ -31,8 +33,6 @@ data class Patent(
         val name_of_client: String?=null,
         val clients_address: String?=null,
         val clients_contact_person:String?=null,
-        val patentee_name: String?=null,
-        val patentee_address: String?=null,
         val date_instruction_received: LocalDateTime?=null,
         val lawyer_responsible: String?=null,
         val invention_description: String?=null,
