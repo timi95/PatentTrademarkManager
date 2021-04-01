@@ -169,6 +169,15 @@ class InstructionService {
         return saveInstruction(instruction)
     }
 
+    fun applyPAmendmentAction(
+            instruction_id: UUID,
+            action: P_AmendmentAction): Instruction {
+        val instruction: Instruction = patentRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return saveInstruction(instruction)
+    }
+
+
 
     //  TRADEMARK METHODS
 
