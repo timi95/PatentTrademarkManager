@@ -85,6 +85,10 @@ class InstructionController {
   fun applyPRenewalAction(@PathVariable id: UUID, @RequestBody pAction: P_RenewalAction) =
           instructionService.applyPRenewalAction(id, pAction)
 
+  @PutMapping("/patent/{id}/amendment-action")
+  fun applyPAmendmentAction(@PathVariable id: UUID, @RequestBody pAction: P_AmendmentAction) =
+      instructionService.applyPAmendmentAction(id, pAction)
+
   @GetMapping("/image/{id}")
   fun retrieveImageById(@PathVariable id: UUID) =
           instructionService.retrieveImageById(id)
