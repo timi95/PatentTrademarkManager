@@ -53,39 +53,39 @@ class InstructionController {
   fun deletePatent(@PathVariable id: UUID) =
           instructionService.deletePatent(id)
 
-  @PutMapping("/patent/{id}/search-action")
+  @PutMapping("/patent/{id}/search")
   fun applySearchAction(@PathVariable id: UUID, @RequestBody pAction: P_SearchAction) =
           instructionService.applyPSearchAction(id, pAction)
 
-  @PutMapping("/patent/{id}/assignment-merger-action")
+  @PutMapping("/patent/{id}/assignment-merger")
   fun applyPAssignmentMergerAction(@PathVariable id: UUID, @RequestBody pAction: P_AssignmentMergerAction) =
           instructionService.applyPAssignmentMergerAction(id, pAction)
 
-  @PutMapping("/patent/{id}/change-of-address-action")
+  @PutMapping("/patent/{id}/change-address")
   fun applyPChangeOfAddressAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfAddressAction) =
           instructionService.applyPChangeOfAddressAction(id, pAction)
 
-  @PutMapping("/patent/{id}/change-of-name-action")
+  @PutMapping("/patent/{id}/change-name")
   fun applyPChangeOfNameAction(@PathVariable id: UUID, @RequestBody pAction: P_ChangeOfNameAction) =
           instructionService.applyPChangeOfNameAction(id, pAction)
   
-  @PutMapping("/patent/{id}/ctc-action")
+  @PutMapping("/patent/{id}/ctc")
   fun applyPCTCAction(@PathVariable id: UUID, @RequestBody pAction: P_CTCAction) =
           instructionService.applyPCTCAction(id, pAction)
 
-  @PutMapping("/patent/{id}/procurement-of-certificate-action")
+  @PutMapping("/patent/{id}/procurement-of-certificate")
   fun applyPProcurementOfCertificateAction(@PathVariable id: UUID, @RequestBody pAction: P_ProcurementOfCertificateAction) =
           instructionService.applyPProcurementOfCertificateAction(id, pAction)
 
-  @PutMapping("/patent/{id}/registration-action")
+  @PutMapping("/patent/{id}/registration")
   fun applyPRegistrationAction(@PathVariable id: UUID, @RequestBody pAction: P_RegistrationAction) =
           instructionService.applyPRegistrationAction(id, pAction)
 
-  @PutMapping("/patent/{id}/renewal-action")
+  @PutMapping("/patent/{id}/renewal")
   fun applyPRenewalAction(@PathVariable id: UUID, @RequestBody pAction: P_RenewalAction) =
           instructionService.applyPRenewalAction(id, pAction)
 
-  @PutMapping("/patent/{id}/amendment-action")
+  @PutMapping("/patent/{id}/amendment")
   fun applyPAmendmentAction(@PathVariable id: UUID, @RequestBody pAction: P_AmendmentAction) =
       instructionService.applyPAmendmentAction(id, pAction)
 
