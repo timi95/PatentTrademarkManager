@@ -1,6 +1,6 @@
 package com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions
 
-import com.AnO.PatentTrademarkManager.intefaces.Action
+import com.AnO.PatentTrademarkManager.interfaces.Action
 import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDateTime
 import javax.persistence.Entity

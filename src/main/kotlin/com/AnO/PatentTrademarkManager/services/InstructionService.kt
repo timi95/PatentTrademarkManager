@@ -4,8 +4,8 @@ import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
-import com.AnO.PatentTrademarkManager.intefaces.Action
-import com.AnO.PatentTrademarkManager.intefaces.Instruction
+import com.AnO.PatentTrademarkManager.interfaces.Action
+import com.AnO.PatentTrademarkManager.interfaces.Instruction
 import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository
 import com.AnO.PatentTrademarkManager.repositories.ImageRepository
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository

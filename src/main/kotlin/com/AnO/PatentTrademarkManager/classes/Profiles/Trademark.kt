@@ -2,8 +2,8 @@ package com.AnO.PatentTrademarkManager.classes.Profiles
 
 import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Opposition
-import com.AnO.PatentTrademarkManager.intefaces.Action
-import com.AnO.PatentTrademarkManager.intefaces.Instruction
+import com.AnO.PatentTrademarkManager.interfaces.Action
+import com.AnO.PatentTrademarkManager.interfaces.Instruction
 import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDateTime
 import java.util.*

@@ -1,4 +1,4 @@
-package com.AnO.PatentTrademarkManager.intefaces
+package com.AnO.PatentTrademarkManager.interfaces
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.fasterxml.jackson.annotation.JsonSubTypes

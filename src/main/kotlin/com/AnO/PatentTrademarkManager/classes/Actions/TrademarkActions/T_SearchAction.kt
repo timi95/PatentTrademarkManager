@@ -1,6 +1,6 @@
 package com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions
 
-import com.AnO.PatentTrademarkManager.intefaces.Action
+import com.AnO.PatentTrademarkManager.interfaces.Action
 import java.time.LocalDateTime
 
 data class T_SearchAction(
