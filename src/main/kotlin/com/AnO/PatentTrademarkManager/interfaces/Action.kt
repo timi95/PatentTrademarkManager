@@ -31,6 +31,7 @@ abstract class Action(@Id @GeneratedValue open val id:UUID?=null,
 /* concrete action types
 
 
+Patent Action Types
 
     'search',
     'renewal',
@@ -42,12 +43,7 @@ abstract class Action(@Id @GeneratedValue open val id:UUID?=null,
     'assignment-merger',
     "amendment",
 
-
-
-
-
-
-Trademark
+Trademark Action Types
 
 
 

@@ -180,7 +180,6 @@ class InstructionService {
 
 
     //  TRADEMARK METHODS
-
     fun getTrademarks(page: Int? = 1,
                       size: Int? = 10,
                       direction: Sort.Direction,
