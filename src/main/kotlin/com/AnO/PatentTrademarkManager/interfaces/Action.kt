@@ -30,7 +30,6 @@ abstract class Action(@Id @GeneratedValue open val id:UUID?=null,
 
 /* concrete action types
 
-
 Patent Action Types
 
     'search',
