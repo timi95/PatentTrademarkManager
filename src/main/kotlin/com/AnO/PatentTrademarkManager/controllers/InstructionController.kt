@@ -74,7 +74,7 @@ class InstructionController {
           instructionService.applyPCTCAction(id, pAction)
 
   @PutMapping("/patent/{id}/procurement")
-  fun applyPProcurementOfCertificateAction(@PathVariable id: UUID, @RequestBody pAction: P_ProcurementOfCertificateAction) =
+  fun applyPProcurementOfCertificateAction(@PathVariable id: UUID, @RequestBody pAction: P_ProcurementAction) =
           instructionService.applyPProcurementOfCertificateAction(id, pAction)
 
   @PutMapping("/patent/{id}/registration")

@@ -7,7 +7,7 @@ import java.util.*
 import javax.persistence.Entity
 
 @Entity
-@JsonTypeName("change_of_address")
+@JsonTypeName("change-address")
 data class P_ChangeOfAddressAction(
         private val type_id:String?=null,
         override var instruction_ref: UUID?=null,

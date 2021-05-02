@@ -19,7 +19,7 @@ this works for this type info structure
         JsonSubTypes.Type(value = P_SearchAction::class, name ="search"),
         JsonSubTypes.Type(value = P_RenewalAction::class, name ="renewal"),
         JsonSubTypes.Type(value = P_RegistrationAction::class, name ="registration"),
-        JsonSubTypes.Type(value = P_ProcurementOfCertificateAction::class, name ="procurement"),
+        JsonSubTypes.Type(value = P_ProcurementAction::class, name ="procurement"),
         JsonSubTypes.Type(value = P_CTCAction::class, name ="ctc"),
         JsonSubTypes.Type(value = P_ChangeOfNameAction::class, name ="change-name"),
         JsonSubTypes.Type(value = P_ChangeOfAddressAction::class, name ="change-address"),

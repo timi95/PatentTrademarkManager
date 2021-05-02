@@ -147,9 +147,13 @@ class InstructionService {
 
     fun applyPProcurementOfCertificateAction(
             instruction_id: UUID,
-            action: P_ProcurementOfCertificateAction): Instruction {
+            action: P_ProcurementAction): Instruction {
         val instruction: Instruction = patentRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        val copy = action.copy(instruction_ref = instruction.id)
+        println("\n " +
+                "Action copy value to be saved: $copy " +
+                "\n")
         return saveInstruction(instruction)
     }
 
