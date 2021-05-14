@@ -264,20 +264,8 @@ class InstructionService {
         return Files.readAllBytes(filePath)
     }
 
-    @Throws(MalformedURLException::class, FileNotFoundException::class)
-    fun retrieveImages(): MutableList<Image> {
-        val images = imageRepository.findAll()
-//        var listOfImages = mutableListOf<ByteArray>()
-//
-//        // get upload directory
-//        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
-//        images.forEach {
-//            // get Path to download
-//            val filePath = fileStorageLocation.resolve(it.imageName!!).normalize()
-//            listOfImages.add(Files.readAllBytes(filePath))
-//        }
-        return images
-    }
+    fun retrieveImages(): MutableList<Image> = imageRepository.findAll()
+    fun retrieveInstructionImages(instruction_id: UUID): MutableList<Image>? = retrieveInstruction(instruction_id).image_list
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
     private fun deleteImageByName(fileName: String){

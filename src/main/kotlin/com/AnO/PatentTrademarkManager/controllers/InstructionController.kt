@@ -93,9 +93,17 @@ class InstructionController {
   fun retrieveImageById(@PathVariable id: UUID) =
           instructionService.retrieveImageById(id)
 
-  @GetMapping("/image")
+  @GetMapping("/image-name")
   fun retrieveImageByName(@RequestParam name: String) =
           instructionService.retrieveImageByName(name)
+
+  @GetMapping("/image")
+  fun retrieveImages() =
+          instructionService.retrieveImages()
+
+  @GetMapping("/image/instruction/{id}")
+  fun retrieveInstructionImages(@PathVariable id: UUID) =
+          instructionService.retrieveInstructionImages(id)
 
   @PostMapping("/patent/{id}/image", consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
   fun addPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
