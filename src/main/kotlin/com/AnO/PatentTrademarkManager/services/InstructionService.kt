@@ -226,43 +226,27 @@ class InstructionService {
 
         val targetLocation = fileStorageLocation.resolve(fileName)
 
+        val fileURL = Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(fileName).normalize().toString()
+
         Files.copy(file.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
 
-        val response = Image(null, downloadUrl + fileName, fileName, file.size, file.contentType, instruction_id)
+        val response = Image(null, fileURL, fileName, file.size, file.contentType, instruction_id)
 
         return imageRepository.save(response)
     }
 
 
-    @Throws(MalformedURLException::class, FileNotFoundException::class)
-    fun retrieveImageById(id: UUID): ByteArray {
-        val image = imageRepository.findById(id).get()
-        // get upload directory
-        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
+    fun retrieveImageById(id: UUID): Image? = imageRepository.findById(id).get()
+//    {
+//        val image = imageRepository.findById(id).get()
+//        return Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(image.imageName!!).normalize()
+//    }
 
-        // get Path to download
-        val filePath = fileStorageLocation.resolve(image.imageName!!).normalize()
-
-        // Get Resource Url
-        val resource: Resource = UrlResource(filePath.toUri())
-        if (!resource.exists()) {
-            throw FileNotFoundException("File $id Not Found")
-        }
-        return Files.readAllBytes(filePath)
-    }
-
-    @Throws(MalformedURLException::class, FileNotFoundException::class)
-    fun retrieveImageByName(fileName: String): ByteArray {
-        val image = imageRepository.findByImageName(fileName).get()
-
-        // get upload directory
-        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
-
-        // get Path to download
-        val filePath = fileStorageLocation.resolve(image.imageName!!).normalize()
-
-        return Files.readAllBytes(filePath)
-    }
+    fun retrieveImageByName(fileName: String): Image? = imageRepository.findByImageName(fileName).get()
+//    {
+//        val image = imageRepository.findByImageName(fileName).get()
+//        return Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(image.imageName!!).normalize()
+//    }
 
     fun retrieveImages(): MutableList<Image> = imageRepository.findAll()
     fun retrieveInstructionImages(instruction_id: UUID): MutableList<Image>? = retrieveInstruction(instruction_id).image_list
@@ -276,11 +260,11 @@ class InstructionService {
         try {
             // delete File
             file.deleteRecursively()
-        }catch (e: Exception) {throw(e)}
+        } catch (e: Exception) {throw(e)}
     }
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
-    fun deleteImage(id: UUID){
+    fun deleteImage(id: UUID) {
         // image entity
         val image = imageRepository.findById(id).get()
         try {
@@ -292,6 +276,8 @@ class InstructionService {
             instruction?.let { saveInstruction(it) }
             // delete File
             image.imageName?.let { deleteImageByName(it) }
+            // delete image entity
+            imageRepository.deleteById(id)
         } catch (e: Exception){ throw(e) }
 
     }
