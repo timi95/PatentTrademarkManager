@@ -279,8 +279,8 @@ class InstructionService {
             // delete image entity
             imageRepository.deleteById(id)
         } catch (e: Exception){ throw(e) }
-
     }
+
     fun updateImage(){}
 
     fun addPImage(id: UUID, multipartFile: MultipartFile): Instruction {
