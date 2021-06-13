@@ -236,18 +236,16 @@ class InstructionService {
     }
 
 
+    fun refreshPaths(): MutableList<Image>? {
+        imageRepository.findAll().forEach {
+            val fileURL = Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(it.imageName).normalize().toString()
+            imageRepository.save(it.copy(pathString = "localhost:8080$fileURL"))
+        }
+        return imageRepository.findAll()
+    }
+
     fun retrieveImageById(id: UUID): Image? = imageRepository.findById(id).get()
-//    {
-//        val image = imageRepository.findById(id).get()
-//        return Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(image.imageName!!).normalize()
-//    }
-
     fun retrieveImageByName(fileName: String): Image? = imageRepository.findByImageName(fileName).get()
-//    {
-//        val image = imageRepository.findByImageName(fileName).get()
-//        return Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(image.imageName!!).normalize()
-//    }
-
     fun retrieveImages(): MutableList<Image> = imageRepository.findAll()
     fun retrieveInstructionImages(instruction_id: UUID): MutableList<Image>? = retrieveInstruction(instruction_id).image_list
 
