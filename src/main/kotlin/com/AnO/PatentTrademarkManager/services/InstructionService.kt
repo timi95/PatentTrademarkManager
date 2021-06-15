@@ -228,21 +228,18 @@ class InstructionService {
 
         val fileURL = Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(fileName).normalize().toString()
 
+        val fileEncoded = Base64.getEncoder().encodeToString(file.inputStream.readAllBytes())
+
+
         Files.copy(file.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
 
-        val response = Image(null, fileURL, fileName, file.size, file.contentType, instruction_id)
+
+        val response = Image(null, fileEncoded, fileURL, fileName, file.size, file.contentType, instruction_id)
 
         return imageRepository.save(response)
     }
 
 
-    fun refreshPaths(): MutableList<Image>? {
-        imageRepository.findAll().forEach {
-            val fileURL = Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(it.imageName).normalize().toString()
-            imageRepository.save(it.copy(pathString = "localhost:8080$fileURL"))
-        }
-        return imageRepository.findAll()
-    }
 
     fun retrieveImageById(id: UUID): Image? = imageRepository.findById(id).get()
     fun retrieveImageByName(fileName: String): Image? = imageRepository.findByImageName(fileName).get()
