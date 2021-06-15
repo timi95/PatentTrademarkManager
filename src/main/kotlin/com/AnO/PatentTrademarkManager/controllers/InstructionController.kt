@@ -113,8 +113,5 @@ class InstructionController {
   fun deleteImage(@PathVariable id:UUID) =
           instructionService.deleteImage(id)
 
-  @GetMapping("refresh")
-  fun refreshImagePath() = instructionService.refreshPaths()
-
 
 }
