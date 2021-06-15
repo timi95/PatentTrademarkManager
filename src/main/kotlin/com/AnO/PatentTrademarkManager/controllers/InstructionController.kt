@@ -113,5 +113,7 @@ class InstructionController {
   fun deleteImage(@PathVariable id:UUID) =
           instructionService.deleteImage(id)
 
+  @GetMapping("/image64/{id}")
+  fun retrieveImageEncodeString(@PathVariable id: UUID) = instructionService.retrieveImageEncodeString(id)
 
 }

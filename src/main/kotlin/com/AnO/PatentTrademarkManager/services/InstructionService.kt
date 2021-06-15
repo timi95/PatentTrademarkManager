@@ -243,6 +243,14 @@ class InstructionService {
     fun retrieveImages(): MutableList<Image> = imageRepository.findAll()
     fun retrieveInstructionImages(instruction_id: UUID): MutableList<Image>? = retrieveInstruction(instruction_id).image_list
 
+
+    fun retrieveImageEncodeString(id: UUID): String? {
+        val image = imageRepository.findById(id).get()
+        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
+        val filePath = fileStorageLocation.resolve(image.imageName).normalize()
+        return Base64.getEncoder().encodeToString( Files.readAllBytes(filePath))
+    }
+
     @Throws(MalformedURLException::class, FileNotFoundException::class)
     private fun deleteImageByName(fileName: String){
         // get upload directory
