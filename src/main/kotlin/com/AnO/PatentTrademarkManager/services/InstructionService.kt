@@ -238,8 +238,7 @@ class InstructionService {
 
 
 
-    fun retrieveImageById(id: UUID): String? = retrieveImageEncodeString(id)
-//        imageRepository.findById(id).get()
+    fun retrieveImageById(id: UUID): Image? = imageRepository.findById(id).get()
     fun retrieveImageByName(fileName: String): Image? = imageRepository.findByImageName(fileName).get()
     fun retrieveImages(): MutableList<Image> = imageRepository.findAll()
     fun retrieveInstructionImages(instruction_id: UUID): MutableList<Image>? = retrieveInstruction(instruction_id).image_list
