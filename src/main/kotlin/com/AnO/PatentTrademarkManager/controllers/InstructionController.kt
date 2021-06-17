@@ -6,16 +6,20 @@ import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.Resource
 import org.springframework.data.domain.Sort
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
+
 @Api(value = "Instruction",
 description = "Rest API for Instructions",
 tags = ["Instruction"])
-@CrossOrigin(origins = arrayOf("http://localhost:4200"))
+@CrossOrigin(origins = ["http://localhost:4200"])
 @RestController
 @RequestMapping("/Instruction")
 class InstructionController {
@@ -105,15 +109,11 @@ class InstructionController {
   fun retrieveInstructionImages(@PathVariable id: UUID) =
           instructionService.retrieveInstructionImages(id)
 
-  @PostMapping("/patent/{id}/image", consumes = arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+  @PostMapping("/patent/{id}/image", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
   fun addPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
           instructionService.addPImage(id, multipartFile)
 
   @DeleteMapping("/image/{id}")
   fun deleteImage(@PathVariable id:UUID) =
           instructionService.deleteImage(id)
-
-  @GetMapping("/image64/{id}")
-  fun retrieveImageEncodeString(@PathVariable id: UUID) = instructionService.retrieveImageEncodeString(id)
-
 }
