@@ -4,19 +4,21 @@ import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
+import com.AnO.PatentTrademarkManager.classes.Utility.Utility.pageRequest
 import com.AnO.PatentTrademarkManager.interfaces.Action
 import com.AnO.PatentTrademarkManager.interfaces.Instruction
 import com.AnO.PatentTrademarkManager.repositories.ActionRepositories.SearchActionRepository
 import com.AnO.PatentTrademarkManager.repositories.ImageRepository
 import com.AnO.PatentTrademarkManager.repositories.PatentRepository
 import com.AnO.PatentTrademarkManager.repositories.TrademarkRepository
-import com.AnO.PatentTrademarkManager.classes.Utility.Utility.pageRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.core.io.UrlResource
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.web.multipart.MultipartFile
@@ -217,39 +219,49 @@ class InstructionService {
         catch (e: Exception){throw e}
     }
 
-    @Throws(IOException::class)
+
     fun saveImage(file: MultipartFile, instruction_id: UUID): Image {
         val fileName = StringUtils
         .cleanPath(Objects.requireNonNull(file.originalFilename!!.replace("[()]|\\s+".toRegex(), "_")))
-
-        val fileStorageLocation: Path = Paths.get(UPLOAD_DIR)
-
-        val targetLocation = fileStorageLocation.resolve(fileName)
-
-        val fileURL = Paths.get(UPLOAD_DIR).toAbsolutePath().resolve(fileName).normalize().toString()
-
-        Files.copy(file.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
-
-
-        val response = Image(null, fileURL, fileName, file.size, file.contentType, instruction_id)
-
-        return imageRepository.save(response)
+        try{
+            Files.copy(file.inputStream, Paths.get(UPLOAD_DIR).resolve(fileName), StandardCopyOption.REPLACE_EXISTING)
+            //flush Image Object in order to attain a valid ID
+            val response = imageRepository.save(Image())
+            val fileURL = "http://localhost:8080/Instruction/image/${response.id}"
+            return imageRepository.save(
+            response.copy(  pathString= fileURL,
+                            imageName = fileName,
+                            imageSize = file.size,
+                            contentType = file.contentType,
+                            instruction_ref = instruction_id))
+            } catch (e:Error){throw (e)}
     }
 
 
 
-    fun retrieveImageById(id: UUID): Image? = imageRepository.findById(id).get()
-    fun retrieveImageByName(fileName: String): Image? = imageRepository.findByImageName(fileName).get()
+    fun retrieveImageById(id: UUID): ResponseEntity<ByteArray> {
+        val image = imageRepository.findById(id).get()
+        // get upload directory
+        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
+        // get Path to download
+        val filePath = fileStorageLocation.resolve(image.imageName!!).normalize()
+        // Get Resource Url
+        val resource: Resource = UrlResource(filePath.toUri())
+        if (!resource.exists()) {
+            throw FileNotFoundException("File $id Not Found")
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(Files.readAllBytes(filePath))
+    }
+    fun retrieveImageByName(fileName: String): ResponseEntity<ByteArray> {
+        val image = imageRepository.findByImageName(fileName).get()
+        // get upload directory
+        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
+        // get Path to download
+        val filePath = fileStorageLocation.resolve(image.imageName!!).normalize()
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(Files.readAllBytes(filePath))
+    }
     fun retrieveImages(): MutableList<Image> = imageRepository.findAll()
     fun retrieveInstructionImages(instruction_id: UUID): MutableList<Image>? = retrieveInstruction(instruction_id).image_list
-
-
-    fun retrieveImageEncodeString(id: UUID): String? {
-        val image = imageRepository.findById(id).get()
-        val fileStorageLocation = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize()
-        val filePath = fileStorageLocation.resolve(image.imageName).normalize()
-        return Base64.getEncoder().encodeToString( Files.readAllBytes(filePath))
-    }
 
     @Throws(MalformedURLException::class, FileNotFoundException::class)
     private fun deleteImageByName(fileName: String){
@@ -280,8 +292,6 @@ class InstructionService {
             imageRepository.deleteById(id)
         } catch (e: Exception){ throw(e) }
     }
-
-    fun updateImage(){}
 
     fun addPImage(id: UUID, multipartFile: MultipartFile): Instruction {
         val patent = patentRepository.findById(id).get()
