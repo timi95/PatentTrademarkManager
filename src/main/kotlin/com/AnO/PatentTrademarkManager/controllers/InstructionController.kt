@@ -109,11 +109,21 @@ class InstructionController {
   fun retrieveInstructionImages(@PathVariable id: UUID) =
           instructionService.retrieveInstructionImages(id)
 
-  @PostMapping("/patent/{id}/image", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
-  fun addPImage(@PathVariable id: UUID, @RequestPart multipartFile: MultipartFile) =
-          instructionService.addPImage(id, multipartFile)
+  @PostMapping("/patent/{id}/image")
+  fun addPImage(@PathVariable id: UUID, @RequestPart img: MultipartFile) =
+          instructionService.addPImage(id, img)
 
   @DeleteMapping("/image/{id}")
   fun deleteImage(@PathVariable id:UUID) =
           instructionService.deleteImage(id)
+
+  //TRADEMARKS
+
+  @GetMapping("/trademark")
+  fun getTrademarks(@RequestParam(defaultValue = "0") page:Int,
+                    @RequestParam(defaultValue = "10") size:Int,
+                    @RequestParam direction:Sort.Direction?,
+                    @RequestParam(defaultValue = "id") sort_property:String?) =
+    instructionService.getTrademarks(page, size, direction=Sort.DEFAULT_DIRECTION, sort_property="id")
+
 }
