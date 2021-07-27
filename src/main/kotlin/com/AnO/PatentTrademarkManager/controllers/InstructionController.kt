@@ -126,4 +126,8 @@ class InstructionController {
                     @RequestParam(defaultValue = "id") sort_property:String?) =
     instructionService.getTrademarks(page, size, direction=Sort.DEFAULT_DIRECTION, sort_property="id")
 
+  @GetMapping("/trademark/{id}")
+  fun getTrademark(@PathVariable id: UUID) =
+    instructionService.getTrademark(id)
+
 }
