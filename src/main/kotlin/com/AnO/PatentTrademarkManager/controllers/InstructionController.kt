@@ -3,6 +3,7 @@ package com.AnO.PatentTrademarkManager.controllers
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
+import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.AnO.PatentTrademarkManager.services.InstructionService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
@@ -129,5 +130,9 @@ class InstructionController {
   @GetMapping("/trademark/{id}")
   fun getTrademark(@PathVariable id: UUID) =
     instructionService.getTrademark(id)
+
+  @PostMapping("/trademark")
+  fun createTrademark(@RequestBody trademark: Trademark) =
+    instructionService.createTrademark(trademark)
 
 }
