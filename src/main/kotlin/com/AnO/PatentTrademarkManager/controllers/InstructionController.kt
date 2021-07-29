@@ -135,4 +135,9 @@ class InstructionController {
   fun createTrademark(@RequestBody trademark: Trademark) =
     instructionService.createTrademark(trademark)
 
+  @PutMapping("/trademark/{id}")
+  fun updateTrademark(@PathVariable id:UUID, @RequestBody trademark: Trademark) =
+    instructionService.updateTrademark(id,trademark)
+
+
 }
