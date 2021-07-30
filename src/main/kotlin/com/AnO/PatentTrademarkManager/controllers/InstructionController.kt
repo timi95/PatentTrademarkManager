@@ -140,4 +140,7 @@ class InstructionController {
     instructionService.updateTrademark(id,trademark)
 
 
+  @DeleteMapping("/trademark/{id}")
+  fun deleteTrademark(@PathVariable id: UUID) =
+    instructionService.deleteTrademark(id)
 }
