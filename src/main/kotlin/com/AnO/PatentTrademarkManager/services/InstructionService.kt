@@ -1,6 +1,7 @@
 package com.AnO.PatentTrademarkManager.services
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
+import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AmendmentAction
 import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
@@ -217,6 +218,15 @@ class InstructionService {
             return trademarkRepository
                     .delete(trademarkRepository.findById(id).get()) }
         catch (e: Exception){throw e}
+    }
+
+
+    fun applyTAmendmentAction(
+        instruction_id: UUID,
+        action: T_AmendmentAction): Instruction {
+        val instruction: Instruction = trademarkRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return saveInstruction(instruction)
     }
 
 
