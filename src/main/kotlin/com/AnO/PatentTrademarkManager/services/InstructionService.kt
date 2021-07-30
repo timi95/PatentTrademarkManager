@@ -237,8 +237,6 @@ class InstructionService {
             } catch (e:Error){throw (e)}
     }
 
-
-
     fun retrieveImageById(id: UUID): ResponseEntity<ByteArray> {
         val image = imageRepository.findById(id).get()
         // get upload directory
@@ -299,7 +297,7 @@ class InstructionService {
         return saveInstruction(patent)
     }
 
-    fun applyTImage(id: UUID, multipartFile: MultipartFile): Instruction {
+    fun addTImage(id: UUID, multipartFile: MultipartFile): Instruction {
         val trademark = trademarkRepository.findById(id).get()
         trademark.image_list?.add(saveImage(multipartFile,id))
         return saveInstruction(trademark)
