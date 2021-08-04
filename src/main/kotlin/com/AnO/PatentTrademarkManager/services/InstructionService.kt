@@ -4,6 +4,7 @@ import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AmendmentAction
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AssignmentMergerAction
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_ChangeOfAddressAction
+import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_ProcurementOfCertificateAction
 import com.AnO.PatentTrademarkManager.classes.Image
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
@@ -241,6 +242,14 @@ class InstructionService {
     fun applyTChangeOfAdressAction(
         instruction_id: UUID,
         action: T_ChangeOfAddressAction): Instruction {
+        val instruction: Instruction = trademarkRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return saveInstruction(instruction)
+    }
+
+    fun applyTProcurementOfCertificate(
+        instruction_id: UUID,
+        action: T_ProcurementOfCertificateAction): Instruction {
         val instruction: Instruction = trademarkRepository.findById(instruction_id).get()
         instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
         return saveInstruction(instruction)
