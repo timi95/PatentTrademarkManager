@@ -3,11 +3,14 @@ package com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions
 import com.AnO.PatentTrademarkManager.interfaces.Action
 import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.LocalDateTime
+import java.util.*
 import javax.persistence.Entity
 
 @Entity
 @JsonTypeName("registration")
 data class T_RegistrationAction(
+        private val type_id:String?=null,
+        override var instruction_ref: UUID?=null,
 
         val date_instruction: LocalDateTime?=null,
         val date_instruction_concluded: LocalDateTime?=null,
@@ -28,5 +31,5 @@ data class T_RegistrationAction(
         val official_fee_registration: String?=null,
         val registration_status: String?=null,
         val registration_no: String?=null,
-        val registration_filing_date: LocalDateTime?=null ,
+        val registration_filing_date: LocalDateTime?=null,
         val trademark_description: String?=null,): Action()
