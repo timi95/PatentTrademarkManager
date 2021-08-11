@@ -268,6 +268,14 @@ class InstructionService {
         return saveInstruction(instruction)
     }
 
+    fun applyTRenewalAction(
+        instruction_id: UUID,
+        action: T_RenewalAction): Instruction {
+        val instruction: Instruction = trademarkRepository.findById(instruction_id).get()
+        instruction.action_list?.add(action.copy(instruction_ref = instruction.id))
+        return saveInstruction(instruction)
+    }
+
     fun saveImage(file: MultipartFile, instruction_id: UUID): Image {
         val fileName = StringUtils
         .cleanPath(Objects.requireNonNull(file.originalFilename!!.replace("[()]|\\s+".toRegex(), "_")))
