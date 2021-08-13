@@ -2,6 +2,7 @@ package com.AnO.PatentTrademarkManager.controllers
 
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
+import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AmendmentAction
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.AnO.PatentTrademarkManager.services.InstructionService
@@ -143,4 +144,8 @@ class InstructionController {
   @DeleteMapping("/trademark/{id}")
   fun deleteTrademark(@PathVariable id: UUID) =
     instructionService.deleteTrademark(id)
+
+  @PutMapping("/trademark/{id}/search")
+  fun applyAmendmentAction(@PathVariable id: UUID, @RequestBody tAction: T_AmendmentAction) =
+    instructionService.applyTAmendmentAction(id, tAction)
 }
