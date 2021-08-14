@@ -3,6 +3,7 @@ package com.AnO.PatentTrademarkManager.controllers
 
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AmendmentAction
+import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AssignmentMergerAction
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.AnO.PatentTrademarkManager.services.InstructionService
@@ -145,7 +146,11 @@ class InstructionController {
   fun deleteTrademark(@PathVariable id: UUID) =
     instructionService.deleteTrademark(id)
 
-  @PutMapping("/trademark/{id}/search")
+  @PutMapping("/trademark/{id}/amendment")
   fun applyAmendmentAction(@PathVariable id: UUID, @RequestBody tAction: T_AmendmentAction) =
     instructionService.applyTAmendmentAction(id, tAction)
+
+  @PutMapping("/trademark/{id}/assignment-merger")
+  fun applyAssignmentMerger(@PathVariable id: UUID, @RequestBody tAction: T_AssignmentMergerAction) =
+    instructionService.applyTAssignmentMergerAction(id, tAction)
 }
