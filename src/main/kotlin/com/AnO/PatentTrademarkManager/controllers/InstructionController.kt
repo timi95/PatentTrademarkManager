@@ -4,6 +4,7 @@ package com.AnO.PatentTrademarkManager.controllers
 import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AmendmentAction
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AssignmentMergerAction
+import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_ChangeOfAddressAction
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.AnO.PatentTrademarkManager.services.InstructionService
@@ -153,4 +154,8 @@ class InstructionController {
   @PutMapping("/trademark/{id}/assignment-merger")
   fun applyAssignmentMerger(@PathVariable id: UUID, @RequestBody tAction: T_AssignmentMergerAction) =
     instructionService.applyTAssignmentMergerAction(id, tAction)
+
+  @PutMapping("/trademark/{id}/change-address")
+  fun applyChangeOfAdressAction(@PathVariable id: UUID, @RequestBody tAction: T_ChangeOfAddressAction) =
+    instructionService.applyTChangeOfAdressAction(id, tAction)
 }
