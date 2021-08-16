@@ -5,6 +5,7 @@ import com.AnO.PatentTrademarkManager.classes.Actions.PatentActions.*
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AmendmentAction
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_AssignmentMergerAction
 import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_ChangeOfAddressAction
+import com.AnO.PatentTrademarkManager.classes.Actions.TrademarkActions.T_ProcurementOfCertificateAction
 import com.AnO.PatentTrademarkManager.classes.Profiles.Patent
 import com.AnO.PatentTrademarkManager.classes.Profiles.Trademark
 import com.AnO.PatentTrademarkManager.services.InstructionService
@@ -158,4 +159,8 @@ class InstructionController {
   @PutMapping("/trademark/{id}/change-address")
   fun applyChangeOfAdressAction(@PathVariable id: UUID, @RequestBody tAction: T_ChangeOfAddressAction) =
     instructionService.applyTChangeOfAdressAction(id, tAction)
+
+  @PutMapping("/trademark/{id}/procurement")
+  fun applyChangeOfAdressAction(@PathVariable id: UUID, @RequestBody tAction: T_ProcurementOfCertificateAction) =
+    instructionService.applyTProcurementOfCertificate(id, tAction)
 }
