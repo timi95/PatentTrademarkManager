@@ -163,4 +163,8 @@ class InstructionController {
   @PutMapping("/trademark/{id}/reclassification")
   fun applyReclassificationAction(@PathVariable id: UUID, @RequestBody tAction: T_ReclassificationAction) =
     instructionService.applyTReclassificationAction(id, tAction)
+
+  @PutMapping("/trademark/{id}/registration")
+  fun applyRegistrationAction(@PathVariable id: UUID, @RequestBody tAction: T_RegistrationAction) =
+    instructionService.applyTRegistrationAction(id, tAction)
 }
