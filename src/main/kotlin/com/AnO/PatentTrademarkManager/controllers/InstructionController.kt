@@ -167,4 +167,8 @@ class InstructionController {
   @PutMapping("/trademark/{id}/registration")
   fun applyRegistrationAction(@PathVariable id: UUID, @RequestBody tAction: T_RegistrationAction) =
     instructionService.applyTRegistrationAction(id, tAction)
+
+  @PutMapping("/trademark/{id}/renewal")
+  fun applyRenewalAction(@PathVariable id: UUID, @RequestBody tAction: T_RenewalAction) =
+    instructionService.applyTRenewalAction(id, tAction)
 }
