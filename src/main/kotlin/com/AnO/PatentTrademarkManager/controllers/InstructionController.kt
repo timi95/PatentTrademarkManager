@@ -95,29 +95,10 @@ class InstructionController {
   fun applyPAmendmentAction(@PathVariable id: UUID, @RequestBody pAction: P_AmendmentAction) =
       instructionService.applyPAmendmentAction(id, pAction)
 
-  @GetMapping("/image/{id}")
-  fun retrieveImageById(@PathVariable id: UUID) =
-          instructionService.retrieveImageById(id)
 
-  @GetMapping("/image-name")
-  fun retrieveImageByName(@RequestParam name: String) =
-          instructionService.retrieveImageByName(name)
-
-  @GetMapping("/image")
-  fun retrieveImages() =
-          instructionService.retrieveImages()
-
-  @GetMapping("/image/instruction/{id}")
-  fun retrieveInstructionImages(@PathVariable id: UUID) =
-          instructionService.retrieveInstructionImages(id)
-
-  @PostMapping("/patent/{id}/image")
-  fun addPImage(@PathVariable id: UUID, @RequestPart img: MultipartFile) =
-          instructionService.addPImage(id, img)
-
-  @DeleteMapping("/image/{id}")
-  fun deleteImage(@PathVariable id:UUID) =
-          instructionService.deleteImage(id)
+  @PostMapping("/trademark/{id}/image")
+  fun addTImage(@PathVariable id: UUID, @RequestPart img: MultipartFile) =
+    instructionService.addTImage(id, img)
 
   //TRADEMARKS
 
