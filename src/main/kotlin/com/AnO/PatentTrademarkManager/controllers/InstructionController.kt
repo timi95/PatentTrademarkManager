@@ -156,4 +156,30 @@ class InstructionController {
   @PutMapping("/trademark/{id}/search")
   fun applySearchAction(@PathVariable id: UUID, @RequestBody tAction: T_SearchAction) =
     instructionService.applyTSearchAction(id, tAction)
+
+
+  //IMAGE CONTROLS
+  @GetMapping("/image/{id}")
+  fun retrieveImageById(@PathVariable id: UUID) =
+    instructionService.retrieveImageById(id)
+
+  @GetMapping("/image-name")
+  fun retrieveImageByName(@RequestParam name: String) =
+    instructionService.retrieveImageByName(name)
+
+  @GetMapping("/image")
+  fun retrieveImages() =
+    instructionService.retrieveImages()
+
+  @GetMapping("/image/instruction/{id}")
+  fun retrieveInstructionImages(@PathVariable id: UUID) =
+    instructionService.retrieveInstructionImages(id)
+
+  @DeleteMapping("/image/{id}")
+  fun deleteImage(@PathVariable id:UUID) =
+    instructionService.deleteImage(id)
+
+  @PostMapping("/patent/{id}/image")
+  fun addPImage(@PathVariable id: UUID, @RequestPart img: MultipartFile) =
+    instructionService.addPImage(id, img)
 }
