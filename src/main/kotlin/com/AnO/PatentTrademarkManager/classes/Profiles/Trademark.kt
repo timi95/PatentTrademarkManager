@@ -19,8 +19,10 @@ data class Trademark(
         @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
         override val image_list: MutableList<Image>?=mutableListOf(),
         @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
-        val opposition_list:MutableList<Opposition>?= mutableListOf(),
+        val opposition_list:MutableList<Opposition>?=mutableListOf(),
 
+	val trademark_title: String?=null,
+	val trademarkee_name: String?=null,
         val applicable_official_fee: LocalDateTime?=null,
         val applicable_service_charge: String?=null,
         val trademark_class: String?=null,
