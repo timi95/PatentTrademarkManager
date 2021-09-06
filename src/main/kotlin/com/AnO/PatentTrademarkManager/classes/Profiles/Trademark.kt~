@@ -58,6 +58,7 @@ data class Trademark(
         val proprietors_address: String?=null,
         val quicktellers_fee: String?=null,
         val registration_no: String?=null,
+	val registration_date: LocalDateTime?=null,
         val trademark_description: String?=null):Instruction()
 
 /*

@@ -25,6 +25,7 @@ data class Trademark(
 	val trademarkee_name: String?=null,
 	val our_reference_number: String?=null,
 	val clients_reference_number: String?=null,
+	val application_number: String?=null,
         val applicable_official_fee: LocalDateTime?=null,
         val applicable_service_charge: String?=null,
         val trademark_class: String?=null,
