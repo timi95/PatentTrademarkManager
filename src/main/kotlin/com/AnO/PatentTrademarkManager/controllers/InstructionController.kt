@@ -138,7 +138,7 @@ class InstructionController {
     instructionService.applyTChangeOfAdressAction(id, tAction)
 
   @PutMapping("/trademark/{id}/procurement")
-  fun applyChangeOfAdressAction(@PathVariable id: UUID, @RequestBody tAction: T_ProcurementOfCertificateAction) =
+  fun applyProcurementOfCertificateAction(@PathVariable id: UUID, @RequestBody tAction: T_ProcurementOfCertificateAction) =
     instructionService.applyTProcurementOfCertificate(id, tAction)
 
   @PutMapping("/trademark/{id}/reclassification")
