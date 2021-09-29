@@ -21,7 +21,7 @@ import java.util.*
 @Api(value = "Instruction",
 description = "Rest API for Instructions",
 tags = ["Instruction"])
-@CrossOrigin(origins = ["http://localhost:4200"])
+@CrossOrigin(origins = ["http://localhost:4200","https://ptman-demo.netlify.app"])
 @RestController
 @RequestMapping("/Instruction")
 class InstructionController {
